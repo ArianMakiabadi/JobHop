@@ -42,6 +42,10 @@ export default {
         warning: withOpacity("--color-warning"),
         error: withOpacity("--color-error"),
       },
+      container: {
+        center: true,
+        padding: "1rem",
+      },
     },
   },
   plugins: [],
