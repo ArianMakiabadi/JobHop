@@ -33,6 +33,23 @@
     --color-red-300: 252, 165, 165;
   }
 }
+@layer components {
+  .textField__input {
+    @apply py-3 px-4 rounded-xl
+            text-secondary-900 border border-gray-300
+            hover:border-primary-300 focus:border-primary-500 outline-none
+            transition-all duration-300 ease-in-out focus:shadow-md;
+  }
+  .btn {
+    @apply px-3 py-1 rounded-xl transition-all duration-300;
+  }
+  .btn--primary {
+    @apply bg-primary-900 text-secondary-100 hover:bg-primary-700 shadow-md shadow-primary-300;
+  }
+  .btn--secondary {
+    @apply bg-secondary-600 text-secondary-100 hover:bg-primary-700 shadow-md shadow-secondary-300;
+  }
+}
 
 html,
 body {
@@ -41,4 +58,18 @@ body {
   min-height: 100vh;
   user-select: none;
   background-color: rgb(var(--background-app-rgb));
+}
+
+label {
+  display: block;
+}
+
+/* Remove number input arrows*/
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
 }
