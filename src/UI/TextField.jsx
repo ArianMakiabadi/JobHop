@@ -2,7 +2,7 @@ function TextField({ label, name, onChange, placeholder, value }) {
   return (
     <div>
       <div>
-        <label className="mb-1" htmlFor={name}>
+        <label className="mb-1 text-slate-600" htmlFor={name}>
           {label}
         </label>
         <input
