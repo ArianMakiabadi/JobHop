@@ -6,8 +6,8 @@ function Auth() {
     <div className="flex justify-center pt-10">
       {" "}
       <div className="w-full sm:max-w-sm">
-        {/* <SendOTPForm /> */}
-        <CheckOTPForm />
+        <SendOTPForm />
+        {/* <CheckOTPForm /> */}
       </div>
     </div>
   );
