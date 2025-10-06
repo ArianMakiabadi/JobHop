@@ -5,8 +5,7 @@ import { getOtp } from "../../services/authService";
 import toast from "react-hot-toast";
 import Loading from "../../UI/Loading";
 
-function SendOTPForm({ setStep }) {
-  const [phoneNumber, setPhoneNumber] = useState("");
+function SendOTPForm({ setStep, setPhoneNumber, phoneNumber }) {
   const { error, isPending, data, mutateAsync } = useMutation({
     mutationFn: getOtp,
   });
