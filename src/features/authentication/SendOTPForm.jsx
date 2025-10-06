@@ -22,8 +22,8 @@ function SendOTPForm({ setStep, setPhoneNumber, phoneNumber }) {
   };
 
   return (
-    <div className="border shadow-md px-10 pb-24 pt-12 w-[28rem] mx-auto rounded-xl">
-      <h2 className="font-bold text-lg pb-2">Login | signup</h2>
+    <div className="border shadow-md px-10 pb-20 pt-12 w-[28rem] mx-auto rounded-3xl">
+      <h2 className="font-bold text-3xl text-center pb-4">Login | signup</h2>
       <form className="space-y-4" onSubmit={sendOtpHandler}>
         <TextField
           onChange={(e) => setPhoneNumber(e.target.value)}
