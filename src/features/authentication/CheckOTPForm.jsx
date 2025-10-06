@@ -1,13 +1,16 @@
 import { useMutation } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
 import { checkOtp } from "../../services/authService";
 import toast from "react-hot-toast";
+import { HiArrowNarrowLeft } from "react-icons/hi";
+const OTP_RESEND_DELAY = 90;
 
-function CheckOTPForm({ phoneNumber }) {
+function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
   const [otp, setOtp] = useState("");
+  const [time, setTime] = useState(OTP_RESEND_DELAY);
 
-  const { data, error, isPending, mutateAsync } = useMutation({
+  const { mutateAsync } = useMutation({
     mutationFn: checkOtp,
   });
 
@@ -24,9 +27,24 @@ function CheckOTPForm({ phoneNumber }) {
     }
   };
 
+  useEffect(() => {
+    const timer =
+      time > 0 && setInterval(() => setTime((prev) => prev - 1), 1000);
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [time]);
+
   return (
-    <div className="border shadow-md px-10 pb-24 pt-12 w-[28rem] mx-auto rounded-xl">
+    <div className="border shadow-md px-10 pb-10 pt-10 w-[28rem] mx-auto rounded-3xl">
+      <button>
+        <HiArrowNarrowLeft
+          className="w-6 h-6 mb-4 text-secondary-500"
+          onClick={onBack}
+        />
+      </button>
       <form className="space-y-5" onSubmit={checkOtpHandler}>
+        <h2 className="text-center font-bold text-3xl">Verify your number</h2>
         <p className="text-slate-900 text-lg">
           Enter the 6-digit code we sent to your phone
         </p>
@@ -45,6 +63,21 @@ function CheckOTPForm({ phoneNumber }) {
           }}
         />
         <button className="w-full btn btn--primary">Verify</button>
+        <div className="mb-4 text-center text-xs text-secondary-500">
+          {time > 0 ? (
+            <p>Request a new code in {time} seconds</p>
+          ) : (
+            <button
+              className="underline"
+              onClick={(e) => {
+                onResendOtp(e); // calls sendOtpHandler()
+                setTime(OTP_RESEND_DELAY); // resets countdown
+              }}
+            >
+              Get another code?
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );
