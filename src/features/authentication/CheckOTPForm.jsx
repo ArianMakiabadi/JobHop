@@ -4,13 +4,14 @@ import OTPInput from "react-otp-input";
 import { checkOtp } from "../../services/authService";
 import toast from "react-hot-toast";
 import { HiArrowNarrowLeft } from "react-icons/hi";
+import Loading from "../../UI/Loading";
 const OTP_RESEND_DELAY = 90;
 
 function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
   const [otp, setOtp] = useState("");
   const [time, setTime] = useState(OTP_RESEND_DELAY);
 
-  const { mutateAsync } = useMutation({
+  const { isPending, mutateAsync } = useMutation({
     mutationFn: checkOtp,
   });
 
@@ -62,7 +63,13 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
             borderRadius: "0.5rem",
           }}
         />
-        <button className="w-full btn btn--primary">Verify</button>
+        <div>
+          {isPending ? (
+            <Loading />
+          ) : (
+            <button className="w-full btn btn--primary">Verify</button>
+          )}
+        </div>
         <div className="mb-4 text-center text-xs text-secondary-500">
           {time > 0 ? (
             <p>Request a new code in {time} seconds</p>
