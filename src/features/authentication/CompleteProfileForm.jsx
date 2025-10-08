@@ -57,7 +57,7 @@ function CompleteProfileForm() {
                 label="Employer"
                 stretch={true}
                 onChange={(e) => setRole(e.target.value)}
-                checked={role === "EMPLOYER"}
+                checked={role === "OWNER"}
               />
               <RadioButton
                 name="role"
