@@ -1,11 +1,30 @@
 import { useState } from "react";
 import TextField from "../../UI/TextField";
 import RadioButton from "../../UI/RadioButton";
+import { useMutation } from "@tanstack/react-query";
+import { completeProfile } from "../../services/authService";
+import toast from "react-hot-toast";
+import Loading from "../../UI/Loading";
 
 function CompleteProfileForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState();
+
+  const { isPending, mutateAsync } = useMutation({
+    mutationFn: completeProfile,
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { user, message } = await mutateAsync({ name, email, role });
+      console.log(user);
+      toast.success(message);
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
 
   return (
     <div className="flex justify-center border shadow-md px-10 pb-10 pt-10 mt-10 w-[28rem] mx-auto rounded-3xl">
@@ -15,7 +34,7 @@ function CompleteProfileForm() {
           Complete your profile to unlock your dashboard.
         </p>
 
-        <form className="space-y-2">
+        <form className="space-y-2" onSubmit={handleSubmit}>
           <TextField
             label="Firstname & Lastname"
             onChange={(e) => setName(e.target.value)}
@@ -33,7 +52,7 @@ function CompleteProfileForm() {
             <div className="flex gap-3 flex-1">
               <RadioButton
                 name="role"
-                value="EMPLOYER"
+                value="OWNER"
                 id="EMPLOYER"
                 label="Employer"
                 stretch={true}
@@ -51,7 +70,15 @@ function CompleteProfileForm() {
               />
             </div>
           </div>
-          <button className="btn btn--primary w-full">Let’s go!</button>
+          <div>
+            {isPending ? (
+              <Loading />
+            ) : (
+              <button type="submit" className="btn btn--primary w-full">
+                Let’s go!
+              </button>
+            )}
+          </div>
         </form>
       </div>
     </div>

@@ -12,7 +12,7 @@ function TextField({ label, name, onChange, placeholder, value }) {
           onChange={onChange}
           className="w-full textField__input"
           placeholder={placeholder}
-          type="number"
+          type="text"
           autoComplete="off"
         />
       </div>
