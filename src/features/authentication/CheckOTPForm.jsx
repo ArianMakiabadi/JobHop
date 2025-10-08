@@ -5,9 +5,11 @@ import { checkOtp } from "../../services/authService";
 import toast from "react-hot-toast";
 import { HiArrowNarrowLeft } from "react-icons/hi";
 import Loading from "../../UI/Loading";
+import { useNavigate } from "react-router-dom";
 const OTP_RESEND_DELAY = 90;
 
 function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
+  const navigate = useNavigate();
   const [otp, setOtp] = useState("");
   const [time, setTime] = useState(OTP_RESEND_DELAY);
 
@@ -18,11 +20,17 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
   const checkOtpHandler = async (e) => {
     e.preventDefault();
     try {
-      const data = await mutateAsync({ phoneNumber, otp });
-      console.log(data);
-      toast.success(data.message);
-      //if data user is completed => push to /owner /freelancer
-      //else push to /complete-profile
+      const { user, message } = await mutateAsync({ phoneNumber, otp });
+      toast.success(message);
+
+      if (!user.isActive) return navigate("/complete-profile");
+      if (user.status !== 2) {
+        navigate("/");
+        toast("Awaiting admin approval", { icon: "⏳" });
+        return;
+      }
+      if (user.role === "OWNER") return navigate("/employer");
+      if (user.role === "FREELANCER") return navigate("/freelancer");
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }

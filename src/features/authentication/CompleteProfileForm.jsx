@@ -5,8 +5,10 @@ import { useMutation } from "@tanstack/react-query";
 import { completeProfile } from "../../services/authService";
 import toast from "react-hot-toast";
 import Loading from "../../UI/Loading";
+import { useNavigate } from "react-router-dom";
 
 function CompleteProfileForm() {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState();
@@ -18,9 +20,14 @@ function CompleteProfileForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { user, message } = await mutateAsync({ name, email, role });
-      console.log(user);
-      toast.success(message);
+      const { user } = await mutateAsync({ name, email, role });
+      if (user.status !== 2) {
+        navigate("/");
+        toast("Awaiting admin approval", { icon: "⏳" });
+        return;
+      }
+      if (user.role === "OWNER") return navigate("/employer");
+      if (user.role === "FREELANCER") return navigate("/freelancer");
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
