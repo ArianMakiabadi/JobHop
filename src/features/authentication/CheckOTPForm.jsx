@@ -67,7 +67,9 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
           {isPending ? (
             <Loading />
           ) : (
-            <button className="w-full btn btn--primary">Verify</button>
+            <button type="submit" className="w-full btn btn--primary">
+              Verify
+            </button>
           )}
         </div>
         <div className="mb-4 text-center text-xs text-secondary-500">
