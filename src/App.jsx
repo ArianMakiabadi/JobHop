@@ -14,17 +14,15 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Toaster />
-      <div className="container xl:max-w-screen-xl">
-        <Routes>
-          <Route path="/auth" element={<Auth />}></Route>
-          <Route path="/complete-profile" element={<CompleteProfile />}></Route>
-          <Route element={<AppLayout />}>
-            <Route path="/employer" element={<Employer />} />
-          </Route>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/*" element={<NotFound />}></Route>
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/auth" element={<Auth />}></Route>
+        <Route path="/complete-profile" element={<CompleteProfile />}></Route>
+        <Route element={<AppLayout />}>
+          <Route path="/employer" element={<Employer />} />
+        </Route>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/*" element={<NotFound />}></Route>
+      </Routes>
     </QueryClientProvider>
   );
 }
