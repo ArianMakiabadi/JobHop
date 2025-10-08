@@ -1,5 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 export default function NotFound() {
-  const goHome = () => (window.location.href = "/");
+  const navigate = useNavigate();
+  const goHome = () => navigate("/");
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4">
