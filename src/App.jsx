@@ -6,9 +6,9 @@ import CompleteProfile from "./pages/CompleteProfile";
 import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import AppLayout from "./UI/AppLayout";
-import EmployerDashboard from "./UI/EmployerDashboard";
-import Projects from "./UI/Projects";
-import Project from "./UI/Project";
+import EmployerDashboard from "./pages/EmployerDashboard";
+import Projects from "./pages/Projects";
+import Project from "./pages/Project";
 
 const queryClient = new QueryClient();
 
