@@ -1,6 +1,7 @@
 import useEmployerProjects from "./useEmployerProjects";
 import Loading from "../../UI/Loading";
 import Empty from "../../UI/Empty";
+import truncateText from "../../utils/TruncateText";
 
 function ProjectsTable() {
   const { isLoading, projects } = useEmployerProjects();
@@ -26,7 +27,7 @@ function ProjectsTable() {
           {projects.map((project, index) => (
             <tr key={project._id}>
               <td>{index + 1}</td>
-              <td>{project.title}</td>
+              <td>{truncateText(project.title, 25)}</td>
               <td>{project.category.title}</td>
               <td>{project.budget}</td>
               <td>
