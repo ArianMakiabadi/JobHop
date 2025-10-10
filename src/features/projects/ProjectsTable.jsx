@@ -2,6 +2,7 @@ import useEmployerProjects from "./useEmployerProjects";
 import Loading from "../../UI/Loading";
 import Empty from "../../UI/Empty";
 import truncateText from "../../utils/TruncateText";
+import toLocalDateShort from "../../utils/toLocalDateShort";
 
 function ProjectsTable() {
   const { isLoading, projects } = useEmployerProjects();
@@ -30,13 +31,7 @@ function ProjectsTable() {
               <td>{truncateText(project.title, 25)}</td>
               <td>{project.category.title}</td>
               <td>{project.budget}</td>
-              <td>
-                {new Date(project.deadline).toLocaleDateString("en-GB", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })}
-              </td>
+              <td>{toLocalDateShort(project.deadline)}</td>
               <td>
                 <div className="flex flex-wrap items-center gap-2 max-w-[200px]">
                   {project.tags.map((tag, index) => (
