@@ -49,6 +49,29 @@
   .btn--secondary {
     @apply bg-secondary-600 text-secondary-100 hover:bg-primary-700 shadow-md shadow-secondary-300;
   }
+  .badge {
+    @apply inline-flex items-center justify-center rounded-full px-3 py-1 text-xs font-medium select-none transition-colors duration-200;
+  }
+
+  .badge--primary {
+    @apply bg-primary-600 text-white hover:bg-primary-700;
+  }
+
+  .badge--secondary {
+    @apply bg-secondary-100 text-secondary-700 hover:bg-secondary-200;
+  }
+
+  .badge--success {
+    @apply bg-green-100 text-green-700 hover:bg-green-200;
+  }
+
+  .badge--warning {
+    @apply bg-yellow-100 text-yellow-800 hover:bg-yellow-200;
+  }
+
+  .badge--danger {
+    @apply bg-red-100 text-red-700 hover:bg-red-200;
+  }
 }
 
 html,
@@ -72,4 +95,53 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+/* Table base */
+table {
+  width: 100%;
+  border-collapse: separate; /* Allows rounded corners */
+  border-spacing: 0;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background-color: rgb(var(--color-secondary-0));
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.05);
+}
+
+/* Table header */
+table thead {
+  background-color: rgb(var(--color-secondary-100));
+}
+
+table thead th {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgb(var(--color-secondary-700));
+  text-align: center;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgb(var(--color-secondary-200));
+}
+
+/* Table body cells */
+table tbody td {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: rgb(var(--color-secondary-800));
+  border-bottom: 1px solid rgb(var(--color-secondary-200));
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Title row */
+table .title-row {
+  background-color: rgb(var(--color-secondary-200));
+}
+
+/* Hover effect */
+table tbody tr:hover {
+  background-color: rgb(var(--color-secondary-50));
+  transition: background-color 0.15s ease-in-out;
 }
