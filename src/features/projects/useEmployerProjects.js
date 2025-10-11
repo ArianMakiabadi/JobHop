@@ -3,7 +3,7 @@ import { getEmployerProjectsApi } from "../../services/projectService";
 
 export default function useEmployerProjects() {
   const { data, isLoading } = useQuery({
-    queryKey: ["projects"],
+    queryKey: ["employer-projects"],
     queryFn: getEmployerProjectsApi,
   });
 
