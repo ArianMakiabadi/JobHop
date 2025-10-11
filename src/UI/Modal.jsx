@@ -1,6 +1,8 @@
 import { HiOutlineX } from "react-icons/hi";
+import useOutsideClick from "../hooks/useOutsideClick";
 
 function Modal({ open, onClose, title, children }) {
+  const ref = useOutsideClick(onClose);
   return (
     open && (
       <div
@@ -8,6 +10,7 @@ function Modal({ open, onClose, title, children }) {
         w-full h-screen bg-secondary-800 bg-opacity-30 z-50"
       >
         <div
+          ref={ref}
           className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 sm:w-96 md:w-full md:max-w-lg
                      rounded-xl bg-secondary-0 p-4 shadow-lg transition-all duration-300 ease-out
                      "
