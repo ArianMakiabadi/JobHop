@@ -1,4 +1,3 @@
-import { useState } from "react";
 import TextField from "../../UI/TextField";
 import RadioButton from "../../UI/RadioButton";
 import { useMutation } from "@tanstack/react-query";
@@ -6,21 +5,23 @@ import { completeProfile } from "../../services/authService";
 import toast from "react-hot-toast";
 import Loading from "../../UI/Loading";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 function CompleteProfileForm() {
   const navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [role, setRole] = useState();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const { isPending, mutateAsync } = useMutation({
     mutationFn: completeProfile,
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const formSubmit = async (data) => {
     try {
-      const { user } = await mutateAsync({ name, email, role });
+      const { user } = await mutateAsync(data);
       if (user.status !== 2) {
         navigate("/");
         toast("Awaiting admin approval", { icon: "⏳" });
@@ -41,18 +42,32 @@ function CompleteProfileForm() {
           Complete your profile to unlock your dashboard.
         </p>
 
-        <form className="space-y-2" onSubmit={handleSubmit}>
+        <form className="space-y-2" onSubmit={handleSubmit(formSubmit)}>
           <TextField
             label="Firstname & Lastname"
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-            name={name}
+            name="name"
+            errors={errors}
+            register={register}
+            validationSchema={{
+              required: "Name is required.",
+              pattern: {
+                value: /^[A-Za-z\s]{2,50}$/,
+                message: "Name must be 2-50 characters and only letters",
+              },
+            }}
           />
           <TextField
             label="Email address"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            name={email}
+            name="email"
+            register={register}
+            errors={errors}
+            validationSchema={{
+              required: "Email is required.",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Invalid email address.",
+              },
+            }}
           />
           <div className="flex gap-4 items-center mt-4">
             <p className="text-slate-600">Role:</p>
@@ -63,8 +78,8 @@ function CompleteProfileForm() {
                 id="EMPLOYER"
                 label="Employer"
                 stretch={true}
-                onChange={(e) => setRole(e.target.value)}
-                checked={role === "OWNER"}
+                register={register}
+                validationSchema={{ required: "Please select your role." }}
               />
               <RadioButton
                 name="role"
@@ -72,11 +87,15 @@ function CompleteProfileForm() {
                 id="FREELANCER"
                 label="Freelancer"
                 stretch={true}
-                onChange={(e) => setRole(e.target.value)}
-                checked={role === "FREELANCER"}
+                register={register}
               />
             </div>
           </div>
+          {errors && errors.role && (
+            <span className="text-error block text-sm mt-0.5">
+              {errors.role?.message}
+            </span>
+          )}
           <div>
             {isPending ? (
               <Loading />

@@ -4,42 +4,55 @@ import SendOTPForm from "./SendOTPForm";
 import { getOtp } from "../../services/authService";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { useForm } from "react-hook-form";
 
 function AuthContainer() {
   const { isPending: isSendingOtp, mutateAsync } = useMutation({
     mutationFn: getOtp,
   });
 
-  const sendOtpHandler = async (e) => {
-    e.preventDefault();
+  const sendOtpHandler = async (data) => {
+    const phoneNumber = String(data.phoneNumber).trim();
     try {
-      const data = await mutateAsync({ phoneNumber });
-      toast.success(data.message);
+      const { message } = await mutateAsync({ phoneNumber });
+      toast.success(message);
       setStep(2);
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
   };
 
-  const [step, setStep] = useState(2);
-  const [phoneNumber, setPhoneNumber] = useState("09121111111");
+  const [step, setStep] = useState(1);
+  const {
+    handleSubmit,
+    register,
+    getValues,
+    formState: { errors },
+  } = useForm();
   const renderStep = () => {
     switch (step) {
       case 1:
         return (
           <SendOTPForm
             isSendingOtp={isSendingOtp}
-            onSubmit={sendOtpHandler}
+            onSubmit={handleSubmit(sendOtpHandler)}
             setStep={setStep}
-            setPhoneNumber={setPhoneNumber}
-            phoneNumber={phoneNumber}
+            register={register}
+            errors={errors}
+            validationSchema={{
+              required: "Please enter your phone number.",
+              pattern: {
+                value: /^[0-9]+$/,
+                message: "Only numbers are allowed.",
+              },
+            }}
           />
         );
       case 2:
         return (
           <CheckOTPForm
             onResendOtp={sendOtpHandler}
-            phoneNumber={phoneNumber}
+            phoneNumber={getValues("phoneNumber")}
             onBack={() => setStep(1)}
           />
         );
