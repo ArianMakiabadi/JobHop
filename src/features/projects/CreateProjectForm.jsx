@@ -13,7 +13,7 @@ function CreateProjectForm() {
   };
 
   return (
-    <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
+    <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
       <TextField
         register={register}
         name="title"

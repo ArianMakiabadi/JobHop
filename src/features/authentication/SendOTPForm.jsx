@@ -9,12 +9,14 @@ function SendOTPForm({
   errors,
 }) {
   return (
-    <div className="border shadow-md px-10 pb-20 pt-12 w-[28rem] mx-auto rounded-3xl">
-      <h2 className="font-bold text-3xl text-center pb-4">Login | signup</h2>
+    <div className="border shadow-md px-10 pb-8 pt-10 w-[28rem] mx-auto rounded-3xl">
+      <h2 className="font-bold text-3xl text-center pb-2">Login | signup</h2>
+      <p className="text-secondary-600 mb-6 text-center">
+        Enter your phone number to continue
+      </p>
       <form className="space-y-4" onSubmit={onSubmit}>
         <TextField
-          placeholder="Phone number"
-          label="Please enter your phone number"
+          label="Phone number"
           name="phoneNumber"
           register={register}
           errors={errors}

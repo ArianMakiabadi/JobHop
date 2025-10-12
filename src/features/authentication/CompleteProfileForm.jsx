@@ -42,7 +42,7 @@ function CompleteProfileForm() {
           Complete your profile to unlock your dashboard.
         </p>
 
-        <form className="space-y-2" onSubmit={handleSubmit(formSubmit)}>
+        <form className="space-y-4" onSubmit={handleSubmit(formSubmit)}>
           <TextField
             label="Firstname & Lastname"
             name="name"
