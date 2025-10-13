@@ -1,15 +1,20 @@
-import { useState } from "react";
-
-function RHFSelect({ label, name, register, options, errors, required }) {
-  const [selected, setSelected] = useState("");
+function RHFSelect({
+  label,
+  name,
+  register,
+  options,
+  errors,
+  required,
+  validationSchema,
+  watch,
+}) {
+  const selectedValue = watch(name) || ""; // watch the RHF value
 
   return (
     <div className="relative mt-6">
       <select
-        {...register(name, { required })}
+        {...register(name, validationSchema)}
         id={name}
-        value={selected}
-        onChange={(e) => setSelected(e.target.value)}
         className="peer w-full border border-secondary-400 rounded-xl px-3 pt-4 pb-3
                    bg-white text-secondary-700 appearance-none
                    focus:outline-none focus:border-primary-500"
@@ -27,13 +32,13 @@ function RHFSelect({ label, name, register, options, errors, required }) {
         className={`absolute left-3 text-secondary-500 transition-all duration-200
           pointer-events-none
           ${
-            selected
+            selectedValue
               ? "-top-2.5 text-sm bg-white px-1 text-secondary-500"
               : "top-4 text-base"
           }
           peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-primary-500 peer-focus:bg-white peer-focus:px-1`}
       >
-        {label} {required && <span className="text-error">*</span>}
+        {label} {required && <span className="text-error z-10">*</span>}
       </label>
 
       {errors && errors[name] && (

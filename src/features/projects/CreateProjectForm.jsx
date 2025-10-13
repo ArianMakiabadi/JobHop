@@ -5,19 +5,39 @@ import { TagsInput } from "react-tag-input-component";
 import { useState } from "react";
 import DatePickerField from "../../UI/DatePickerField";
 import useCategories from "../../hooks/useCategories";
+import useCreateProject from "./useCreateProject";
+import Loading from "../../UI/Loading";
 
-function CreateProjectForm() {
+function CreateProjectForm({ onClose }) {
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+    reset,
+    watch,
+  } = useForm({
+    defaultValues: {
+      category: "",
+    },
+  });
+
   const [tags, setTags] = useState([]);
   const [date, setDate] = useState(new Date());
   const { categories } = useCategories();
+  const { createProject, isCreating } = useCreateProject();
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = (data) => {
+    const newProject = {
+      ...data,
+      tags,
+      deadline: new Date(date).toISOString(),
+    };
+    createProject(newProject, {
+      onSuccess: () => {
+        onClose();
+        reset();
+      },
+    });
   };
 
   return (
@@ -31,6 +51,10 @@ function CreateProjectForm() {
         required
         validationSchema={{
           required: "Please enter a title.",
+          minLength: {
+            value: 3,
+            message: "Title must be at least 3 characters.",
+          },
           maxLength: {
             value: 25,
             message: "Title must be 25 characters or fewer.",
@@ -72,7 +96,12 @@ function CreateProjectForm() {
         name="category"
         register={register}
         options={categories}
+        errors={errors}
         requierd
+        watch={watch}
+        validationSchema={{
+          required: "Please select an option.",
+        }}
       />
 
       <div>
@@ -88,9 +117,15 @@ function CreateProjectForm() {
         />
       </div>
       <DatePickerField date={date} setDate={setDate} label="Deadline" />
-      <button className="btn btn--primary w-full" type="submit">
-        Create
-      </button>
+      <div>
+        {isCreating ? (
+          <Loading />
+        ) : (
+          <button className="btn btn--primary w-full" type="submit">
+            Create
+          </button>
+        )}
+      </div>
     </form>
   );
 }
