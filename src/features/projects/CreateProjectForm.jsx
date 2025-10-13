@@ -1,5 +1,9 @@
 import { useForm } from "react-hook-form";
 import TextField from "../../UI/TextField";
+import RHFSelect from "../../UI/RHFSelect";
+import { TagsInput } from "react-tag-input-component";
+import { useState } from "react";
+import DatePickerField from "../../UI/DatePickerField";
 
 function CreateProjectForm() {
   const {
@@ -7,6 +11,8 @@ function CreateProjectForm() {
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const [tags, setTags] = useState([]);
+  const [date, setDate] = useState(new Date());
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -59,7 +65,28 @@ function CreateProjectForm() {
           },
         }}
       />
-      <button className="btn btn--primary" type="submit">
+      <RHFSelect
+        label="Category"
+        name="category"
+        register={register}
+        options={[]}
+        requierd
+      />
+
+      <div>
+        <label htmlFor="tags" className="mb-2 block text-secondary-700">
+          tags
+        </label>
+        <TagsInput
+          id="tags"
+          value={tags}
+          onChange={setTags}
+          name="tags"
+          classNames={{}}
+        />
+      </div>
+      <DatePickerField date={date} setDate={setDate} label="Deadline" />
+      <button className="btn btn--primary w-full" type="submit">
         Create
       </button>
     </form>

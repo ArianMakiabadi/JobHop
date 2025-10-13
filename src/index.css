@@ -33,10 +33,82 @@
     --color-red-300: 252, 165, 165;
   }
 }
+
+/*? react-tag-input-component styles */
+
+.rti--container {
+  width: 100% !important;
+  border: 1px solid rgb(var(--color-secondary-400)) !important;
+  border-radius: 0.75rem !important;
+  padding: 0.75rem 0.75rem 1rem 0.75rem !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.25rem !important;
+  transition: border-color 0.2s ease-in-out !important;
+  background-color: rgb(var(--color-secondary-0)) !important;
+}
+
+.rti--container:focus-within {
+  border-color: rgb(var(--color-primary-500)) !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Tag style */
+.rti--tag {
+  background-color: rgb(var(--color-secondary-100)) !important;
+  color: rgb(var(--color-secondary-700)) !important;
+  padding: 0.25rem 0.5rem !important;
+  border-radius: 0.5rem !important;
+  font-size: 0.875rem !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.25rem !important;
+}
+
+/* Remove (×) button */
+.rti--tag button {
+  cursor: pointer !important;
+  font-weight: 600 !important;
+  border: none !important;
+  background: none !important;
+}
+.rti--tag button:hover {
+  color: rgb(var(--color-error)) !important;
+}
+
+/* Input field */
+.rti--input {
+  flex: 1 !important;
+  border: none !important;
+  outline: none !important;
+  font-size: 1rem !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  color: rgb(var(--color-secondary-900)) !important;
+}
+
+.rti--input::placeholder {
+  color: rgb(var(--color-secondary-400)) !important;
+}
+
+/* Error state (optional if you manage manually) */
+.rti--container.error {
+  border-color: rgb(var(--color-error)) !important;
+}
+
+/* Disabled state (optional) */
+.rti--container:has(input:disabled) {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+}
+/*? end */
+
 @layer components {
   .textField__input {
     @apply py-3 px-4 rounded-xl
-            text-secondary-900 border border-gray-300
+            text-secondary-900 border border-secondary-400
             hover:border-primary-300 focus:border-primary-500 outline-none
             transition-all duration-300 ease-in-out focus:shadow-md;
   }
