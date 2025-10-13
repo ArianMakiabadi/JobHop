@@ -7,8 +7,10 @@ import DatePickerField from "../../UI/DatePickerField";
 import useCategories from "../../hooks/useCategories";
 import useCreateProject from "./useCreateProject";
 import Loading from "../../UI/Loading";
+import useEditProject from "./useEditProject";
 
-function CreateProjectForm({ onClose }) {
+function CreateProjectForm({ onClose, projectToEdit = {} }) {
+  const isEditMode = !!projectToEdit._id;
   const {
     register,
     formState: { errors },
@@ -17,14 +19,18 @@ function CreateProjectForm({ onClose }) {
     watch,
   } = useForm({
     defaultValues: {
-      category: "",
+      title: projectToEdit.title ?? "",
+      description: projectToEdit.description ?? "",
+      budget: projectToEdit.budget ?? "",
+      category: projectToEdit.category?._id ?? "",
     },
   });
 
-  const [tags, setTags] = useState([]);
-  const [date, setDate] = useState(new Date());
+  const [tags, setTags] = useState(projectToEdit.tags ?? []);
+  const [date, setDate] = useState(new Date(projectToEdit.deadline ?? ""));
   const { categories } = useCategories();
   const { createProject, isCreating } = useCreateProject();
+  const { editProject, isEditing } = useEditProject();
 
   const onSubmit = (data) => {
     const newProject = {
@@ -32,12 +38,24 @@ function CreateProjectForm({ onClose }) {
       tags,
       deadline: new Date(date).toISOString(),
     };
-    createProject(newProject, {
-      onSuccess: () => {
-        onClose();
-        reset();
-      },
-    });
+    if (isEditMode) {
+      editProject(
+        { id: projectToEdit._id, newProject },
+        {
+          onSuccess: () => {
+            onClose();
+            reset();
+          },
+        }
+      );
+    } else {
+      createProject(newProject, {
+        onSuccess: () => {
+          onClose();
+          reset();
+        },
+      });
+    }
   };
 
   return (
@@ -122,7 +140,7 @@ function CreateProjectForm({ onClose }) {
           <Loading />
         ) : (
           <button className="btn btn--primary w-full" type="submit">
-            Create
+            {isEditMode ? "Update" : "Create"}
           </button>
         )}
       </div>

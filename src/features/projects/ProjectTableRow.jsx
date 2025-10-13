@@ -7,6 +7,7 @@ import Modal from "../../UI/Modal";
 import { useState } from "react";
 import ConfirmDelete from "../../UI/ConfirmDelete";
 import useRemoveProject from "./useRemoveProject";
+import CreateProjectForm from "./CreateProjectForm";
 
 function ProjectTableRow({ project, index }) {
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -45,9 +46,12 @@ function ProjectTableRow({ project, index }) {
           <Modal
             open={isEditOpen}
             onClose={() => setIsEditOpen(false)}
-            title="test title"
+            title={`Edit ${project.title}?`}
           >
-            this is modal
+            <CreateProjectForm
+              projectToEdit={project}
+              onClose={() => setIsEditOpen(false)}
+            />
           </Modal>
           <button onClick={() => setIsDeleteOpen(true)}>
             <HiOutlineTrash className="w-5 h-5 text-error hover:text-red-400" />

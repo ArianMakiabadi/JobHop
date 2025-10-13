@@ -12,7 +12,7 @@ function Modal({ open, onClose, title, children }) {
         <div
           ref={ref}
           className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 sm:w-96 md:w-full md:max-w-lg
-                     rounded-xl bg-secondary-0 p-4 shadow-lg transition-all duration-300 ease-out
+                     rounded-xl bg-secondary-0 p-4 shadow-lg transition-all duration-300 ease-out text-base
                      "
         >
           <div
