@@ -4,7 +4,7 @@ function RHFSelect({
   register,
   options,
   errors,
-  required,
+  requierd,
   validationSchema,
   watch,
 }) {
@@ -29,8 +29,8 @@ function RHFSelect({
 
       <label
         htmlFor={name}
-        className={`absolute left-3 text-secondary-500 transition-all duration-200
-          pointer-events-none
+        className={`absolute left-3 text-secondary-400 transition-all duration-200
+          pointer-events-none z-10
           ${
             selectedValue
               ? "-top-2.5 text-sm bg-white px-1 text-secondary-500"
@@ -38,7 +38,7 @@ function RHFSelect({
           }
           peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-primary-500 peer-focus:bg-white peer-focus:px-1`}
       >
-        {label} {required && <span className="text-error z-10">*</span>}
+        {label} {requierd && <span className="text-error">*</span>}
       </label>
 
       {errors && errors[name] && (
