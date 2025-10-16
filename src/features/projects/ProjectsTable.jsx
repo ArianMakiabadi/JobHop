@@ -17,7 +17,7 @@ function ProjectsTable() {
         <th>Budget</th>
         <th>Deadline</th>
         <th>Tags</th>
-        <th>Freelancer</th>
+        <th>Freelancer / Applicants</th>
         <th>Status</th>
         <th>Actions</th>
       </Table.Header>

@@ -130,7 +130,7 @@
   }
 
   .badge {
-    @apply inline-flex items-center justify-center rounded-full px-3 py-1 text-xs font-medium select-none transition-colors duration-200;
+    @apply inline-flex items-center justify-center rounded-full px-3 py-1 text-sm font-medium select-none transition-colors duration-200;
   }
 
   .badge--primary {
@@ -194,7 +194,7 @@ table thead {
 }
 
 table thead th {
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 0.5rem;
   font-size: 0.875rem;
   font-weight: 600;
   color: rgb(var(--color-secondary-700));

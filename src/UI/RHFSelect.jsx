@@ -8,7 +8,8 @@ function RHFSelect({
   validationSchema,
   watch,
 }) {
-  const selectedValue = watch(name) || ""; // watch the RHF value
+  const value = watch(name);
+  const hasValue = value !== undefined && value !== null && value !== "";
 
   return (
     <div className="relative mt-6">
@@ -32,7 +33,7 @@ function RHFSelect({
         className={`absolute left-3 text-secondary-400 transition-all duration-200
           pointer-events-none z-10
           ${
-            selectedValue
+            hasValue
               ? "-top-2.5 text-sm bg-white px-1 text-secondary-500"
               : "top-4 text-base"
           }

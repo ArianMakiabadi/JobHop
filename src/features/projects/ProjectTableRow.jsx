@@ -9,6 +9,7 @@ import ConfirmDelete from "../../UI/ConfirmDelete";
 import useRemoveProject from "./useRemoveProject";
 import CreateProjectForm from "./CreateProjectForm";
 import ToggleProjectStatus from "./ToggleProjectStatus";
+import ProjectAssignee from "./ProjectAssignee";
 
 function ProjectTableRow({ project, index }) {
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -23,15 +24,17 @@ function ProjectTableRow({ project, index }) {
       <td>{project.budget} €</td>
       <td>{toLocalDateShort(project.deadline)}</td>
       <td>
-        <div className="flex flex-wrap items-center gap-2 max-w-[200px]">
+        <div className="flex flex-wrap items-center justify-center gap-1 max-w-[200px]">
           {project.tags.map((tag, index) => (
-            <span className="badge badge--secondary" key={index}>
+            <span className="badge badge--secondary text-[0.6rem]" key={index}>
               {tag}
             </span>
           ))}
         </div>
       </td>
-      <td>{project.freelancer?.name || "-"}</td>
+      <td>
+        <ProjectAssignee project={project} />
+      </td>
       <td>
         <ToggleProjectStatus project={project} />
       </td>
