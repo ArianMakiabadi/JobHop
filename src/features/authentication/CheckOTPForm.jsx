@@ -58,6 +58,7 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
           Enter the 6-digit code we sent to your phone
         </p>
         <OTPInput
+          shouldAutoFocus
           value={otp}
           onChange={setOtp}
           numInputs={6}
