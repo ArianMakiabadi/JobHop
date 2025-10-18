@@ -17,7 +17,7 @@ function RHFSelect({
         {...register(name, validationSchema)}
         id={name}
         className="peer w-full border border-secondary-400 rounded-xl px-3 pt-4 pb-3
-                   bg-white text-secondary-700 appearance-none
+                   bg-secondary-0 text-secondary-700 appearance-none
                    focus:outline-none focus:border-primary-500"
       >
         <option value="" disabled hidden></option>
@@ -34,10 +34,10 @@ function RHFSelect({
           pointer-events-none z-10
           ${
             hasValue
-              ? "-top-2.5 text-sm bg-white px-1 text-secondary-500"
+              ? "-top-2.5 text-sm bg-secondary-0 px-1 text-secondary-500"
               : "top-4 text-base"
           }
-          peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-primary-500 peer-focus:bg-white peer-focus:px-1`}
+          peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-primary-500 peer-focus:bg-secondary-0 peer-focus:px-1`}
       >
         {label} {requierd && <span className="text-error">*</span>}
       </label>

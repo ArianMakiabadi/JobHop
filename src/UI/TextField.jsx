@@ -15,7 +15,7 @@ function TextField({
         type={type}
         placeholder=""
         autoComplete="off"
-        className="peer w-full border border-secondary-400 rounded-xl px-3 pt-3 pb-4
+        className="peer w-full bg-secondary-0 border border-secondary-400 rounded-xl px-3 pt-3 pb-4
                    focus:outline-none focus:border-primary-500"
       />
 
@@ -23,8 +23,8 @@ function TextField({
         htmlFor={name}
         className={`absolute left-3 top-2 text-secondary-500 text-sm transition-all duration-200
         peer-placeholder-shown:top-4 peer-placeholder-shown:text-secondary-400 peer-placeholder-shown:text-base
-        peer-focus:-top-2.5 peer-focus:bg-white peer-focus:px-1 peer-focus:text-primary-500 peer-focus:text-sm
-        peer-[&:not(:placeholder-shown)]:-top-2.5 peer-[&:not(:placeholder-shown)]:bg-white peer-[&:not(:placeholder-shown)]:px-1 peer-[&:not(:placeholder-shown)]:text-secondary-500 peer-[&:not(:placeholder-shown)]:text-sm
+        peer-focus:-top-2.5 peer-focus:bg-secondary-0 peer-focus:px-1 peer-focus:text-primary-500 peer-focus:text-sm
+        peer-[&:not(:placeholder-shown)]:-top-2.5 peer-[&:not(:placeholder-shown)]:px-1 peer-[&:not(:placeholder-shown)]:text-secondary-500 peer-[&:not(:placeholder-shown)]:text-sm
         peer-focus:[&:not(:placeholder-shown)]:text-primary-500`}
       >
         {label} {required && <span className="text-error">*</span>}

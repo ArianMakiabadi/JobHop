@@ -8,7 +8,9 @@ function ProjectsHeader() {
 
   return (
     <div className="flex justify-between items-center pb-8">
-      <h1 className="font-semibold text-2xl">Your projects</h1>
+      <h1 className="font-semibold text-2xl text-secondary-800">
+        Your projects
+      </h1>
       <Modal
         title="Add a new project"
         open={open}

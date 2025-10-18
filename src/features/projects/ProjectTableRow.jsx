@@ -41,7 +41,7 @@ function ProjectTableRow({ project, index }) {
       <td>
         <div className="flex items-center gap-x-4">
           <button onClick={() => setIsEditOpen(true)}>
-            <TbPencilMinus className="w-5 h-5 text-primary-900 hover:text-primary-700" />
+            <TbPencilMinus className="w-5 h-5 text-primary-600 hover:text-primary-500" />
           </button>
           <Modal
             open={isEditOpen}
@@ -54,7 +54,7 @@ function ProjectTableRow({ project, index }) {
             />
           </Modal>
           <button onClick={() => setIsDeleteOpen(true)}>
-            <HiOutlineTrash className="w-5 h-5 text-error hover:text-red-400" />
+            <HiOutlineTrash className="w-5 h-5 text-error hover:text-red-300" />
           </button>
           <Modal
             open={isDeleteOpen}

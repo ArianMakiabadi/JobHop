@@ -6,7 +6,7 @@ function Toggle({ checked, onChange }) {
       checked={checked}
       onChange={onChange}
       className={`${
-        checked ? "bg-primary-900" : "bg-secondary-200"
+        checked ? "bg-primary-500" : "bg-secondary-300"
       } relative inline-flex h-6 w-11 items-center rounded-full transition-colors`}
     >
       <span
