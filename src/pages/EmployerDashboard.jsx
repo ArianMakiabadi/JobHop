@@ -1,5 +1,7 @@
+import Dashboard from "../features/employer/Dashboard";
+
 function EmployerDashboard() {
-  return <div>Employer dashboard</div>;
+  return <Dashboard />;
 }
 
 export default EmployerDashboard;
