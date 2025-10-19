@@ -1,11 +1,4 @@
-import {
-  FiActivity,
-  FiGrid,
-  FiMail,
-  FiSend,
-  FiTrendingUp,
-  FiUser,
-} from "react-icons/fi";
+import { FiTrendingUp, FiUser } from "react-icons/fi";
 import Stat from "../../UI/Stat";
 import { FcAcceptDatabase } from "react-icons/fc";
 
@@ -20,7 +13,7 @@ function EmployerStats({ projects }) {
   );
 
   return (
-    <div className="grid grid-cols-1 gap-x-4 gap-y-2">
+    <div className="grid grid-cols-3 gap-x-4 gap-y-2">
       <Stat
         color="green"
         value={countOfProjects}
