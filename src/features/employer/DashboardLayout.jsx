@@ -3,7 +3,7 @@ import useEmployerProjects from "../projects/useEmployerProjects";
 import DashboardHeader from "./DashboardHeader";
 import EmployerStats from "./EmployerStats";
 
-function Dashboard() {
+function DashboardLayout() {
   const { isLoading, projects } = useEmployerProjects();
 
   if (isLoading) return <Loading />;
@@ -16,4 +16,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default DashboardLayout;

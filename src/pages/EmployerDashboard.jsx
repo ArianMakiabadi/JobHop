@@ -1,7 +1,7 @@
-import Dashboard from "../features/employer/Dashboard";
+import DashboardLayout from "../features/employer/DashboardLayout";
 
 function EmployerDashboard() {
-  return <Dashboard />;
+  return <DashboardLayout />;
 }
 
 export default EmployerDashboard;
