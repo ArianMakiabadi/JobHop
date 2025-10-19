@@ -143,7 +143,7 @@
 @layer components {
   .textField__input {
     @apply py-3 px-4 rounded-xl
-            text-secondary-900 border border-secondary-400
+            text-secondary-900 bg-secondary-0 border border-secondary-400
             hover:border-primary-300 focus:border-primary-500 outline-none
             transition-all duration-300 ease-in-out focus:shadow-md;
   }

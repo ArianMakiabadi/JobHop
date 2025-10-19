@@ -15,7 +15,7 @@ function TextField({
         type={type}
         placeholder=""
         autoComplete="off"
-        className="peer w-full bg-secondary-0 border border-secondary-400 rounded-xl px-3 pt-3 pb-4
+        className="peer w-full bg-secondary-0 text-secondary-900 border border-secondary-400 rounded-xl px-3 pt-3 pb-4
                    focus:outline-none focus:border-primary-500"
       />
 
