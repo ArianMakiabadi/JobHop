@@ -1,9 +1,10 @@
-import { MdAssignmentAdd, MdWorkOutline } from "react-icons/md";
+import { MdAssignmentAdd } from "react-icons/md";
 import Table from "../../../UI/Table";
 import toLocalDateShort from "../../../utils/toLocalDateShort";
 import truncateText from "../../../utils/TruncateText";
 import { useState } from "react";
 import Modal from "../../../UI/Modal";
+import CreateProposals from "../../proposals/CreateProposals";
 
 function ProjectTableRow({ project, index }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +40,12 @@ function ProjectTableRow({ project, index }) {
           open={isOpen}
           onClose={() => setIsOpen(false)}
           title="Contact the employer"
-        ></Modal>
+        >
+          <CreateProposals
+            onClose={() => setIsOpen(false)}
+            projectId={project._id}
+          />
+        </Modal>
       </td>
     </Table.Row>
   );
