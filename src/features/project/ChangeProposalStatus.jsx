@@ -31,7 +31,7 @@ function ChangeProposalStatus({ proposalId, onClose, status }) {
   const queryClient = useQueryClient();
   const onSubmit = (data) => {
     changeProposalStatus(
-      { id: proposalId, data },
+      { proposalId, projectId, ...data },
       {
         onSuccess: () => {
           onClose();
