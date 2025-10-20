@@ -24,7 +24,7 @@ function TextField({
         className={`absolute left-3 top-2 text-secondary-500 text-sm transition-all duration-200
         peer-placeholder-shown:top-4 peer-placeholder-shown:text-secondary-400 peer-placeholder-shown:text-base
         peer-focus:-top-2.5 peer-focus:bg-secondary-0 peer-focus:px-1 peer-focus:text-primary-500 peer-focus:text-sm
-        peer-[&:not(:placeholder-shown)]:-top-2.5 peer-[&:not(:placeholder-shown)]:px-1 peer-[&:not(:placeholder-shown)]:text-secondary-500 peer-[&:not(:placeholder-shown)]:text-sm
+        peer-[&:not(:placeholder-shown)]:-top-2.5 peer-[&:not(:placeholder-shown)]:bg-secondary-0 peer-[&:not(:placeholder-shown)]:px-1  peer-[&:not(:placeholder-shown)]:text-secondary-500 peer-[&:not(:placeholder-shown)]:text-sm
         peer-focus:[&:not(:placeholder-shown)]:text-primary-500`}
       >
         {label} {required && <span className="text-error">*</span>}
