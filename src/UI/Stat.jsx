@@ -1,6 +1,6 @@
 const colors = {
   primary: "bg-primary-100 text-primary-700",
-  green: "bg-green-200/50 text-green-700",
+  green: "bg-green-100 text-green-700",
   red: "bg-red-100 text-red-700",
   yellow: "bg-yellow-100 text-yellow-700",
 };

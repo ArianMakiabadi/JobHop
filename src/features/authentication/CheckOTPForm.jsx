@@ -53,8 +53,10 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
         />
       </button>
       <form className="space-y-5" onSubmit={checkOtpHandler}>
-        <h2 className="text-center font-bold text-3xl">Verify your number</h2>
-        <p className="text-slate-900 text-lg">
+        <h2 className="text-center text-secondary-800 font-bold text-3xl">
+          Verify your number
+        </h2>
+        <p className="text-secondary-600 text-lg">
           Enter the 6-digit code we sent to your phone
         </p>
         <OTPInput
@@ -81,7 +83,7 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
             </button>
           )}
         </div>
-        <div className="mb-4 text-center text-xs text-secondary-500">
+        <div className="mb-4 text-center text-xs text-secondary-600">
           {time > 0 ? (
             <p>Request a new code in {time} seconds</p>
           ) : (

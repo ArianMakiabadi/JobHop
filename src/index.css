@@ -153,6 +153,9 @@
   .btn--primary {
     @apply bg-primary-600 text-secondary-100 hover:bg-primary-700 shadow-md shadow-primary-100;
   }
+  .dark-mode .btn--primary {
+    @apply bg-primary-400 text-secondary-800 hover:bg-primary-700 shadow-md shadow-primary-100;
+  }
   .btn--secondary {
     @apply bg-secondary-600 text-secondary-100 hover:bg-primary-700 shadow-md shadow-secondary-300;
   }
@@ -167,25 +170,31 @@
   .badge {
     @apply inline-flex items-center justify-center rounded-full px-3 py-1 text-sm font-medium select-none transition-colors duration-200;
   }
-
   .badge--primary {
-    @apply bg-primary-600 text-white hover:bg-primary-700;
+    @apply bg-primary-600 text-secondary-0 hover:bg-primary-700;
   }
 
   .badge--secondary {
-    @apply bg-secondary-100 text-secondary-700 hover:bg-secondary-200;
+    @apply bg-secondary-100 text-secondary-600 hover:bg-secondary-200;
   }
 
   .badge--success {
-    @apply bg-green-100 text-green-700 hover:bg-green-200;
+    @apply bg-green-100 text-green-600 hover:bg-green-200;
   }
-
+  .dark-mode .badge--success {
+    @apply bg-green-600 text-green-100 hover:bg-green-600;
+  }
   .badge--warning {
-    @apply bg-yellow-100 text-yellow-800 hover:bg-yellow-200;
+    @apply bg-yellow-100 text-yellow-600 hover:bg-yellow-200;
   }
-
+  .dark-mode .badge--warning {
+    @apply bg-yellow-600 text-yellow-100 hover:bg-yellow-600;
+  }
   .badge--danger {
-    @apply bg-red-100 text-red-700 hover:bg-red-200;
+    @apply bg-red-100 text-red-600 hover:bg-red-200;
+  }
+  .dark-mode .badge--danger {
+    @apply bg-red-600 text-red-100 hover:bg-red-600;
   }
 }
 
