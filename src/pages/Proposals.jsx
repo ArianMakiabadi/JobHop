@@ -1,5 +1,14 @@
+import ProposalsTable from "../features/proposals/ProposalsTable";
+
 function Proposals() {
-  return <div>Proposals</div>;
+  return (
+    <div>
+      <h1 className="font-bold text-secondary-700 text-xl mb-8">
+        Your proposals
+      </h1>
+      <ProposalsTable />
+    </div>
+  );
 }
 
 export default Proposals;
