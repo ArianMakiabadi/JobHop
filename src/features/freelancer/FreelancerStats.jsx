@@ -6,7 +6,7 @@ function FreelancerStats({ proposals }) {
   const acceptedProposals = proposals.filter((p) => p.status === 2);
   const countAcceptedProposals = acceptedProposals.length;
   const expectedPayout = acceptedProposals.reduce(
-    (acc, curr) => acc.price + curr,
+    (acc, curr) => curr.price + acc,
     0
   );
 
