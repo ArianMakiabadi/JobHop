@@ -17,6 +17,8 @@ import FreelancerLayout from "./features/freelancer/FreelancerLayout";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ProtectedRoute from "./UI/ProtectedRoute";
 import Unauthorized from "./pages/Unauthorized";
+import AdminLayout from "./features/admin/AdminLayout";
+import AdminDashboard from "./pages/AdminDashboard";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +56,17 @@ function App() {
             <Route path="dashboard" element={<FreelancerDashboard />}></Route>
             <Route path="proposals" element={<Proposals />}></Route>
             <Route path="projects" element={<SubmittedProjects />}></Route>
+          </Route>
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<Navigate to="dashboard" replace />} />
+            <Route path="dashboard" element={<AdminDashboard />}></Route>
           </Route>
           <Route path="/" element={<Home />}></Route>
           <Route path="/*" element={<NotFound />}></Route>

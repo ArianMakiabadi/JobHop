@@ -29,8 +29,14 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
         toast("Awaiting admin approval", { icon: "⏳" });
         return;
       }
-      if (user.role === "EMPLOYER") return navigate("/employer");
-      if (user.role === "FREELANCER") return navigate("/freelancer");
+
+      const roleRoutes = {
+        EMPLOYER: "/employer",
+        FREELANCER: "/freelancer",
+        ADMIN: "/admin",
+      };
+      const route = roleRoutes[user.role];
+      if (route) navigate(route);
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
