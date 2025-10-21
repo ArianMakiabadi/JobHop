@@ -15,6 +15,8 @@ import Proposals from "./pages/Proposals";
 import SubmittedProjects from "./pages/SubmittedProjects";
 import FreelancerLayout from "./features/freelancer/FreelancerLayout";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import ProtectedRoute from "./UI/ProtectedRoute";
+import Unauthorized from "./pages/Unauthorized";
 
 const queryClient = new QueryClient();
 
@@ -27,13 +29,27 @@ function App() {
         <Routes>
           <Route path="/auth" element={<Auth />}></Route>
           <Route path="/complete-profile" element={<CompleteProfile />}></Route>
-          <Route path="/employer" element={<EmployerLayout />}>
+          <Route
+            path="/employer"
+            element={
+              <ProtectedRoute>
+                <EmployerLayout />
+              </ProtectedRoute>
+            }
+          >
             <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<EmployerDashboard />} />
             <Route path="projects" element={<Projects />} />
             <Route path="projects/:id" element={<Project />} />
           </Route>
-          <Route path="/freelancer" element={<FreelancerLayout />}>
+          <Route
+            path="/freelancer"
+            element={
+              <ProtectedRoute>
+                <FreelancerLayout />
+              </ProtectedRoute>
+            }
+          >
             <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<FreelancerDashboard />}></Route>
             <Route path="proposals" element={<Proposals />}></Route>
@@ -41,6 +57,7 @@ function App() {
           </Route>
           <Route path="/" element={<Home />}></Route>
           <Route path="/*" element={<NotFound />}></Route>
+          <Route path="/unauthorized" element={<Unauthorized />}></Route>
         </Routes>
       </QueryClientProvider>
     </DarkModeProvider>
