@@ -29,7 +29,7 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
         toast("Awaiting admin approval", { icon: "⏳" });
         return;
       }
-      if (user.role === "OWNER") return navigate("/employer");
+      if (user.role === "EMPLOYER") return navigate("/employer");
       if (user.role === "FREELANCER") return navigate("/freelancer");
     } catch (error) {
       toast.error(error?.response?.data?.message);

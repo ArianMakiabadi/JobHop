@@ -27,7 +27,7 @@ function CompleteProfileForm() {
         toast("Awaiting admin approval", { icon: "⏳" });
         return;
       }
-      if (user.role === "OWNER") return navigate("/employer");
+      if (user.role === "EMPLOYER") return navigate("/employer");
       if (user.role === "FREELANCER") return navigate("/freelancer");
     } catch (error) {
       toast.error(error?.response?.data?.message);
@@ -74,7 +74,7 @@ function CompleteProfileForm() {
             <div className="flex gap-3 flex-1">
               <RadioButton
                 name="role"
-                value="OWNER"
+                value="EMPLOYER"
                 id="EMPLOYER"
                 label="Employer"
                 stretch={true}
