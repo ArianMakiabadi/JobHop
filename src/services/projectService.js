@@ -4,8 +4,8 @@ export function getEmployerProjectsApi() {
   return http.get("/project/employer-projects").then(({ data }) => data.data);
 }
 
-export function getAllProjectsApi() {
-  return http.get("/project/list").then(({ data }) => data.data);
+export function getProjectsApi(queryString) {
+  return http.get(`/project/list/${queryString}`).then(({ data }) => data.data);
 }
 
 export function removeProjectApi(id) {

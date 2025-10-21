@@ -14,7 +14,7 @@ function ProjectTableRow({ project, index }) {
       label: "open",
       className: "badge--success",
     },
-    CLOSE: {
+    CLOSED: {
       label: "closed",
       className: "badge--danger",
     },
