@@ -19,21 +19,22 @@ export const Home = () => {
         <div className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full bg-secondary-100 opacity-20 -z-10"></div>
 
         <div className="max-w-3xl space-y-6">
-          {/* Badge */}
-          <span className="inline-block rounded-full bg-secondary-100 px-3 py-1.5 text-xs font-semibold text-secondary-700">
+          <span className="inline-block rounded-full border border-primary-700 px-3 py-1.5 text-xs font-semibold text-primary-700">
             Demo version!
           </span>
 
           {/* Headline with gradient emphasis */}
           <h1 className="text-5xl md:text-6xl font-extrabold leading-tight text-secondary-900">
-            Connect <span className="text-primary-600">freelancers</span> with{" "}
-            <span className="text-secondary-600">top employers</span>
+            Connect <span className="text-primary-600">freelancers</span> with
+            top employers
           </h1>
 
           {/* Subtitle */}
-          <p className="text-secondary-700 text-lg md:text-xl">
-            Browse projects, showcase your skills, or hire top talent; all in
-            one place. Everything you need for freelance success.
+          <p className="text-secondary-500 text-lg md:text-xl">
+            Browse projects, showcase your skills, or hire top talents; all in
+            one place.
+            <br />
+            Everything you need for freelance success.
           </p>
 
           {/* CTA buttons */}
@@ -55,7 +56,7 @@ export const Home = () => {
           </div>
 
           {/* Stats */}
-          <div className="pt-12 grid grid-cols-3 gap-6 text-center">
+          <div className="pt-4 md:pt-12 grid grid-cols-3 gap-6 text-center">
             <div>
               <span className="block text-2xl font-bold text-primary-600">
                 500+
