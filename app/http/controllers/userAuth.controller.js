@@ -29,14 +29,14 @@ class userAuthController extends Controller {
     let { phoneNumber } = req.body;
 
     if (!phoneNumber)
-      throw createError.BadRequest("شماره موبایل معتبر را وارد کنید");
+      throw createError.BadRequest("Please enter a valid phone number.");
 
     phoneNumber = phoneNumber.trim();
     this.phoneNumber = phoneNumber;
     this.code = generateRandomNumber(6);
 
     const result = await this.saveUser(phoneNumber);
-    if (!result) throw createError.Unauthorized("ورود شما انجام نشد.");
+    if (!result) throw createError.Unauthorized("Sign-in failed.");
 
     // send OTP
 
@@ -248,11 +248,11 @@ class userAuthController extends Controller {
       }
     );
     if (!updateResult.modifiedCount === 0)
-      throw createError.BadRequest("اطلاعات ویرایش نشد");
+      throw createError.BadRequest("Information was not updated.");
     return res.status(HttpStatus.OK).json({
       statusCode: HttpStatus.OK,
       data: {
-        message: "اطلاعات با موفقیت آپدیت شد",
+        message: "Profile updated successfully",
       },
     });
   }

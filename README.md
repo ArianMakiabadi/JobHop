@@ -29,5 +29,3 @@ npm install
 ```bash
 npm run dev
 ```
-
-If you want me to switch to direct Twilio SMS (messages.create) instead of Verify or add phone normalization, tell me and I'll implement it.

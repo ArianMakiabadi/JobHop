@@ -5,17 +5,17 @@ const { MongoIDPattern } = require("../../../utils/constants");
 const addProposalSchema = Joi.object({
   description: Joi.string()
     .required()
-    .error(createError.BadRequest("توضیحات ارسال شده صحیح نمیباشد")),
+    .error(createError.BadRequest("The proposal description is required and must be valid.")),
   price: Joi.number().error(
-    createError.BadRequest("قیمت وارد شده صحیح نمیباشد")
+    createError.BadRequest("The price provided is invalid.")
   ),
   duration: Joi.number()
     .required()
-    .error(createError.BadRequest(" زمان انجام پروژه را وارد کنید")),
+    .error(createError.BadRequest("Please provide the expected project duration.")),
   projectId: Joi.string()
     .required()
     .regex(MongoIDPattern)
-    .error(createError.BadRequest("شناسه پروژه وارد شده صحیح نمیباشد")),
+    .error(createError.BadRequest("The provided project ID is invalid.")),
 });
 
 module.exports = {

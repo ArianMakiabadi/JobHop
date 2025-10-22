@@ -71,7 +71,7 @@ function generateToken(user, expiresIn, secret) {
       secret || process.env.TOKEN_SECRET_KEY,
       options,
       (err, token) => {
-        if (err) reject(createError.InternalServerError("خطای سروری"));
+        if (err) reject(createError.InternalServerError("Internal server error"));
         resolve(token);
       }
     );
@@ -80,7 +80,7 @@ function generateToken(user, expiresIn, secret) {
 function verifyRefreshToken(req) {
   const refreshToken = req.signedCookies["refreshToken"];
   if (!refreshToken) {
-    throw createError.Unauthorized("لطفا وارد حساب کاربری خود شوید.");
+    throw createError.Unauthorized("Please sign in to continue.");
   }
   const token = cookieParser.signedCookie(
     refreshToken,
@@ -93,17 +93,17 @@ function verifyRefreshToken(req) {
       async (err, payload) => {
         try {
           if (err)
-            reject(createError.Unauthorized("لطفا حساب کاربری خود شوید"));
+            reject(createError.Unauthorized("Please sign in to continue."));
           const { _id } = payload;
           const user = await UserModel.findById(_id, {
             password: 0,
             otp: 0,
             resetLink: 0,
           });
-          if (!user) reject(createError.Unauthorized("حساب کاربری یافت نشد"));
+          if (!user) reject(createError.Unauthorized("User account not found."));
           return resolve(_id);
         } catch (error) {
-          reject(createError.Unauthorized("حساب کاربری یافت نشد"));
+          reject(createError.Unauthorized("User account not found."));
         }
       }
     );
@@ -303,9 +303,9 @@ function deleteInvalidPropertyInObject(data = {}, blackListFields = []) {
 async function checkProductExist(id) {
   const { ProductModel } = require("../app/models/product");
   if (!mongoose.isValidObjectId(id))
-    throw createError.BadRequest("شناسه محصول ارسال شده صحیح نمیباشد");
+    throw createError.BadRequest("The provided product ID is invalid.");
   const product = await ProductModel.findById(id);
-  if (!product) throw createError.NotFound("محصولی یافت نشد");
+  if (!product) throw createError.NotFound("Product not found.");
   return product;
 }
 

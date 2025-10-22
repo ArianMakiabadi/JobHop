@@ -25,12 +25,12 @@ class ProposalController extends Controller {
       { $push: { proposals: proposal._id } }
     );
     if (!proposal?._id)
-      throw createHttpError.InternalServerError("پیشنهاد ثبت نشد");
+      throw createHttpError.InternalServerError("Proposal was not created.");
 
     return res.status(HttpStatus.CREATED).json({
       statusCode: HttpStatus.CREATED,
       data: {
-        message: "پیشنهاد با موفقیت ایجاد شد",
+        message: "Proposal created successfully",
       },
     });
   }
@@ -87,7 +87,7 @@ class ProposalController extends Controller {
       { $set: { status } } // 0, 1, 2
     );
     if (!proposal)
-      throw createHttpError.InternalServerError(" وضعیت پروپوزال آپدیت نشد");
+      throw createHttpError.InternalServerError("Proposal status was not updated.");
 
     const project = await ProjectModel.findOne({
       proposals: { $in: [proposal._id] },
@@ -102,7 +102,7 @@ class ProposalController extends Controller {
       { $set: { freelancer } }
     );
 
-    let message = "وضعیت پروپوزال تایید شد";
+    let message = "Proposal status approved";
     if (status === 0) message = "Proposal rejected!";
     if (status === 1) message = "Proposal accepted!";
 

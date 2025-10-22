@@ -25,12 +25,12 @@ class ProjectController extends Controller {
     });
 
     if (!project?._id)
-      throw createHttpError.InternalServerError("پروژه ثبت نشد");
+      throw createHttpError.InternalServerError("Project was not created.");
 
     return res.status(HttpStatus.CREATED).json({
       statusCode: HttpStatus.CREATED,
       data: {
-        message: "پروژه با موفقیت ایجاد شد",
+        message: "Project created successfully",
         project,
       },
     });
@@ -170,9 +170,9 @@ class ProjectController extends Controller {
   }
   async findProjectById(id) {
     if (!mongoose.isValidObjectId(id))
-      throw createHttpError.BadRequest("شناسه پروژ ارسال شده صحیح نمیباشد");
+      throw createHttpError.BadRequest("The provided project ID is invalid.");
     const project = await ProjectModel.findById(id);
-    if (!project) throw createHttpError.NotFound("پروژه یافت نشد.");
+    if (!project) throw createHttpError.NotFound("Project not found.");
     return project;
   }
   async changeProjectStatus(req, res) {
@@ -185,10 +185,12 @@ class ProjectController extends Controller {
     );
 
     if (updateResult.modifiedCount === 0)
-      throw createHttpError.InternalServerError("وضعیت پروپوزال آپدیت نشد");
+      throw createHttpError.InternalServerError(
+        "Proposal status was not updated."
+      );
 
-    let message = "پروژه بسته شد";
-    if (status === "OPEN") message = "وضعیت پروژه به حالت باز تغییر یافت";
+    let message = "Project closed";
+    if (status === "OPEN") message = "Project status changed to open";
 
     return res.status(HttpStatus.OK).json({
       statusCode: HttpStatus.OK,
@@ -228,11 +230,11 @@ class ProjectController extends Controller {
       }
     );
     if (updateResult.modifiedCount == 0)
-      throw createError.InternalServerError("به روزرسانی انجام نشد");
+      throw createError.InternalServerError("Update failed.");
     return res.status(HttpStatus.OK).json({
       statusCode: HttpStatus.OK,
       data: {
-        message: "به روز رسانی با موفقیت انجام شد",
+        message: "Update completed successfully",
       },
     });
   }
