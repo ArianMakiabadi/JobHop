@@ -25,3 +25,9 @@ export function logoutApi() {
 export function getUsersApi() {
   return http.get("/admin/user/list").then(({ data }) => data.data);
 }
+
+export function changeUserStatusApi({ userId, ...rest }) {
+  return http
+    .patch(`/admin/user/verify/${userId}`, rest)
+    .then(({ data }) => data.data);
+}

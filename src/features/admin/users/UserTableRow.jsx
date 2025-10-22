@@ -2,6 +2,7 @@ import { useState } from "react";
 import Modal from "../../../UI/Modal";
 import Table from "../../../UI/Table";
 import truncateText from "../../../utils/TruncateText";
+import ChangeUserStatus from "./ChangeUserStatus";
 
 function UserTableRow({ index, user }) {
   const { name, email, phoneNumber, role, status } = user;
@@ -41,11 +42,11 @@ function UserTableRow({ index, user }) {
           onClose={() => setIsOpen(false)}
           open={isOpen}
         >
-          {/* <ChangeProposalStatus
-            proposalId={proposal._id}
+          <ChangeUserStatus
+            userId={user._id}
             onClose={() => setIsOpen(false)}
             status={status}
-          /> */}
+          />
         </Modal>
         <button className="btn btn--primary" onClick={() => setIsOpen(true)}>
           change status

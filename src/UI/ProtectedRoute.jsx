@@ -4,13 +4,15 @@ import { useEffect } from "react";
 import Loading from "./Loading";
 
 function ProtectedRoute({ children }) {
-  const { isLoading, isAuthenticated, isAuthorized } = useAuthorize();
+  const { isLoading, isAuthenticated, isAuthorized, isVerified } =
+    useAuthorize();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!isAuthenticated && !isLoading) navigate("/auth");
+    if (!isVerified && !isLoading) navigate("/pending");
     if (!isAuthorized && !isLoading) navigate("/unauthorized");
-  }, [isAuthenticated, isLoading, isAuthorized, navigate]);
+  }, [isAuthenticated, isLoading, isAuthorized, isVerified, navigate]);
 
   if (isLoading)
     return (

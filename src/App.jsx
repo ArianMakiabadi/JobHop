@@ -20,6 +20,7 @@ import Unauthorized from "./pages/Unauthorized";
 import AdminLayout from "./features/admin/AdminLayout";
 import AdminDashboard from "./pages/AdminDashboard";
 import Users from "./pages/Users";
+import PendingApproval from "./pages/PendingApproval";
 
 const queryClient = new QueryClient();
 
@@ -73,6 +74,7 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/*" element={<NotFound />}></Route>
           <Route path="/unauthorized" element={<Unauthorized />}></Route>
+          <Route path="/pending" element={<PendingApproval />}></Route>
         </Routes>
       </QueryClientProvider>
     </DarkModeProvider>

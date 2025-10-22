@@ -2,8 +2,6 @@ import { useState } from "react";
 import Modal from "../../UI/Modal";
 import Table from "../../UI/Table";
 import truncateText from "../../utils/TruncateText";
-import { FaTimes } from "react-icons/fa";
-import { AiOutlineSync } from "react-icons/ai";
 import ChangeProposalStatus from "./ChangeProposalStatus";
 
 //propsal.status:

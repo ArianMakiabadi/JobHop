@@ -25,7 +25,7 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
 
       if (!user.isActive) return navigate("/complete-profile");
       if (user.status !== 2) {
-        navigate("/");
+        navigate("/pending");
         toast("Awaiting admin approval", { icon: "⏳" });
         return;
       }
