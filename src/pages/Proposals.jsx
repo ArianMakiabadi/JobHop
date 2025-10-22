@@ -4,7 +4,7 @@ function Proposals() {
   return (
     <div>
       <h1 className="font-bold text-secondary-700 text-xl mb-8">
-        Your proposals
+        List of proposals
       </h1>
       <ProposalsTable />
     </div>

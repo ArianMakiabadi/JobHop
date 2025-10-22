@@ -70,6 +70,8 @@ function App() {
             <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<AdminDashboard />}></Route>
             <Route path="users" element={<Users />}></Route>
+            <Route path="projects" element={<SubmittedProjects />}></Route>
+            <Route path="proposals" element={<Proposals />}></Route>
           </Route>
           <Route path="/" element={<Home />}></Route>
           <Route path="/*" element={<NotFound />}></Route>
