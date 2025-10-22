@@ -35,7 +35,20 @@ function AuthContainer() {
   }, [user, navigate]);
 
   const sendOtpHandler = async (data) => {
-    const phoneNumber = String(data.phoneNumber).trim();
+    const phoneNumber = String(data.phoneNumber || "").trim();
+    // If the PhoneInput only provides a country code (e.g. "+49") it shouldn't be sent.
+    // Reject if the value is just +<1-3 digits> (typical country calling codes),
+    // or if the total digits are too short.
+    const digitsOnly = phoneNumber.replace(/\D/g, "");
+    if (
+      !phoneNumber ||
+      /^\+\d{1,3}$/.test(phoneNumber) ||
+      digitsOnly.length < 9
+    ) {
+      // safety: do not call API if phone is empty or clearly invalid
+      toast.error("Please enter a valid phone number.");
+      return;
+    }
     try {
       const { message } = await mutateAsync({ phoneNumber });
       toast.success(message);
@@ -48,6 +61,7 @@ function AuthContainer() {
   const {
     handleSubmit,
     register,
+    control,
     getValues,
     formState: { errors },
   } = useForm();
@@ -56,6 +70,7 @@ function AuthContainer() {
       case 1:
         return (
           <SendOTPForm
+            control={control}
             isSendingOtp={isSendingOtp}
             onSubmit={handleSubmit(sendOtpHandler)}
             setStep={setStep}
@@ -64,7 +79,7 @@ function AuthContainer() {
             validationSchema={{
               required: "Please enter your phone number.",
               pattern: {
-                value: /^[0-9]+$/,
+                value: /^\+?[0-9]+$/,
                 message: "Only numbers are allowed.",
               },
             }}
