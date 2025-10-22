@@ -20,6 +20,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Users from "./pages/Users";
 import PendingApproval from "./pages/PendingApproval";
 import { Home } from "./pages/Home";
+import { LearnMore } from "./pages/LearnMore";
 
 const queryClient = new QueryClient();
 
@@ -72,6 +73,7 @@ function App() {
             <Route path="proposals" element={<Proposals />}></Route>
           </Route>
           <Route path="/" element={<Home />}></Route>
+          <Route path="/learn-more" element={<LearnMore />}></Route>
           <Route path="/*" element={<NotFound />}></Route>
           <Route path="/unauthorized" element={<Unauthorized />}></Route>
           <Route path="/pending" element={<PendingApproval />}></Route>
