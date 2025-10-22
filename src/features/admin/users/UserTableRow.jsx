@@ -5,7 +5,7 @@ import truncateText from "../../../utils/TruncateText";
 import ChangeUserStatus from "./ChangeUserStatus";
 
 function UserTableRow({ index, user }) {
-  const { name, email, phoneNumber, role, status } = user;
+  const { name = "-", email = "-", phoneNumber, role, status } = user;
   const [isOpen, setIsOpen] = useState(false);
 
   const userStatus = [
@@ -31,7 +31,6 @@ function UserTableRow({ index, user }) {
       <td>{phoneNumber}</td>
       <td>{role.toLowerCase()}</td>
       <td>
-        {" "}
         <span className={`badge ${userStatus[status].className}`}>
           {userStatus[status].label}
         </span>

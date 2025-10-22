@@ -21,9 +21,12 @@ function UsersTable() {
         <th>Actions</th>
       </Table.Header>
       <Table.Body>
-        {users.map((user, index) => (
-          <UserTableRow key={user._id} user={user} index={index} />
-        ))}
+        {users.map(
+          (user, index) =>
+            user.isActive && (
+              <UserTableRow key={user._id} index={index} user={user} />
+            )
+        )}
       </Table.Body>
     </Table>
   );
