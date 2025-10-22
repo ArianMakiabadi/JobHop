@@ -30,7 +30,7 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
   const [date, setDate] = useState(new Date(projectToEdit.deadline ?? ""));
   const { categories } = useCategories();
   const { createProject, isCreating } = useCreateProject();
-  const { editProject, isEditing } = useEditProject();
+  const { editProject } = useEditProject();
 
   const onSubmit = (data) => {
     const newProject = {
