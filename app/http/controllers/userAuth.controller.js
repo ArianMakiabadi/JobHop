@@ -7,14 +7,16 @@ const {
 } = require("../../../utils/functions");
 const createError = require("http-errors");
 const { UserModel } = require("../../models/user");
-const Kavenegar = require("kavenegar");
+const twilio = require("twilio");
 const CODE_EXPIRES = 90 * 1000; //90 seconds in miliseconds
+
 const { StatusCodes: HttpStatus } = require("http-status-codes");
 const {
   completeProfileSchema,
   updateProfileSchema,
   checkOtpSchema,
 } = require("../validators/user.schema");
+const IS_TEST_MODE = process.env.IS_TESTING_MODE_OTP === "true";
 
 class userAuthController extends Controller {
   constructor() {
@@ -38,7 +40,7 @@ class userAuthController extends Controller {
 
     // send OTP
 
-    if (process.env.IS_TESTING_MODE_OTP) {
+    if (IS_TEST_MODE) {
       return res.status(HttpStatus.OK).send({
         statusCode: HttpStatus.OK,
         data: {
@@ -64,10 +66,44 @@ class userAuthController extends Controller {
 
     if (!user) throw createError.NotFound("User not found");
 
-    if (user.otp.code != code) throw createError.BadRequest("Incorrect code!");
+    // If testing mode is enabled, validate against locally stored OTP
+    if (IS_TEST_MODE) {
+      if (!user.otp || user.otp.code != code)
+        throw createError.BadRequest("Incorrect code!");
+      if (new Date(`${user.otp.expiresIn}`).getTime() < Date.now())
+        throw createError.BadRequest("This code has expired!");
+    } else {
+      // Use Twilio Verify to check the code
+      try {
+        const client = twilio(
+          process.env.TWILIO_ACCOUNT_SID,
+          process.env.TWILIO_AUTH_TOKEN
+        );
+        if (!phoneNumber || typeof phoneNumber !== "string")
+          throw createError.BadRequest("Invalid phone number");
 
-    if (new Date(`${user.otp.expiresIn}`).getTime() < Date.now())
-      throw createError.BadRequest("This code has expired!");
+        if (!phoneNumber.startsWith("+"))
+          console.warn(
+            "Phone number not in E.164 format, Verify may reject it:",
+            phoneNumber
+          );
+
+        const verificationCheck = await client.verify
+          .services(process.env.TWILIO_VERIFY_SID)
+          .verificationChecks.create({ to: phoneNumber, code });
+
+        console.log("Twilio verificationCheck:", verificationCheck);
+
+        if (!verificationCheck || verificationCheck.status !== "approved")
+          throw createError.BadRequest("Incorrect code!");
+      } catch (err) {
+        console.error(
+          "Twilio Verify error:",
+          err && err.message ? err.message : err
+        );
+        throw createError.InternalServerError("Verification provider error");
+      }
+    }
 
     user.isVerifiedPhoneNumber = true;
     await user.save();
@@ -87,10 +123,9 @@ class userAuthController extends Controller {
     });
   }
   async saveUser(phoneNumber) {
-    const otp = {
-      code: this.code,
-      expiresIn: Date.now() + CODE_EXPIRES,
-    };
+    const otp = IS_TEST_MODE
+      ? { code: this.code, expiresIn: Date.now() + CODE_EXPIRES }
+      : { expiresIn: Date.now() + CODE_EXPIRES };
 
     const user = await this.checkUserExist(phoneNumber);
     if (user) return await this.updateUser(phoneNumber, { otp });
@@ -118,34 +153,58 @@ class userAuthController extends Controller {
   }
   //!
   sendOTP(phoneNumber, res) {
-    const kaveNegarApi = Kavenegar.KavenegarApi({
-      apikey: `${process.env.KAVENEGAR_API_KEY}`,
-    });
-    kaveNegarApi.VerifyLookup(
-      {
-        receptor: phoneNumber,
-        token: this.code,
-        template: "registerVerify",
-      },
-      (response, status) => {
-        // console.log(response);
-        // console.log("kavenegar message status", status);
-        if (response && status === 200)
-          return res.status(HttpStatus.OK).send({
-            statusCode: HttpStatus.OK,
-            data: {
-              message: `A verification code has been sent to ${phoneNumber}`,
-              expiresIn: CODE_EXPIRES,
-              phoneNumber,
-            },
-          });
+    // Use Twilio Verify service to send the OTP code
+    try {
+      const client = twilio(
+        process.env.TWILIO_ACCOUNT_SID,
+        process.env.TWILIO_AUTH_TOKEN
+      );
+      console.log("Calling Twilio Verify services with:", {
+        service: process.env.TWILIO_VERIFY_SID,
+        to: phoneNumber,
+        channel: "sms",
+      });
 
-        return res.status(status).send({
-          statusCode: status,
-          message: "Failed to send verification code",
+      client.verify
+        .services(process.env.TWILIO_VERIFY_SID)
+        .verifications.create({ to: phoneNumber, channel: "sms" })
+        .then((verification) => {
+          console.log("Twilio Verify response:", verification);
+          // verification.status is typically 'pending' when sent
+          if (verification && verification.status) {
+            return res.status(HttpStatus.OK).send({
+              statusCode: HttpStatus.OK,
+              data: {
+                message: `A verification code has been sent to ${phoneNumber}`,
+                expiresIn: CODE_EXPIRES,
+                phoneNumber,
+                providerStatus: verification.status,
+              },
+            });
+          }
+
+          return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+            statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+            message: "Failed to initiate verification",
+          });
+        })
+        .catch((err) => {
+          console.error(
+            "Twilio Verify send error:",
+            err && err.message ? err.message : err
+          );
+          return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+            statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+            message: "Failed to send verification code",
+          });
         });
-      }
-    );
+    } catch (err) {
+      console.error("Twilio configuration error:", err);
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
+        statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+        message: "SMS provider configuration error",
+      });
+    }
   }
   async completeProfile(req, res) {
     await completeProfileSchema.validateAsync(req.body);

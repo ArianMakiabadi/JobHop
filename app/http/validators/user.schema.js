@@ -1,11 +1,13 @@
 const Joi = require("joi");
 const createHttpError = require("http-errors");
 
+// Accept only E.164 international format (e.g. +491234567890)
+const e164PhoneNumber = Joi.string()
+  .pattern(/^\+[1-9][0-9]{1,14}$/)
+  .error(createHttpError.BadRequest("شماره موبایل وارد شده صحیح نمیباشد"));
+
 const getOtpSchema = Joi.object({
-  phoneNumber: Joi.string()
-    .length(11)
-    .pattern(/^09[0-9]{9}$/)
-    .error(createHttpError.BadRequest("شماره موبایل وارد شده صحیح نمیباشد")),
+  phoneNumber: e164PhoneNumber,
 });
 
 const checkOtpSchema = Joi.object({
@@ -13,10 +15,7 @@ const checkOtpSchema = Joi.object({
     .min(5)
     .max(6)
     .error(createHttpError.BadRequest("Incorrect code!")),
-  phoneNumber: Joi.string()
-    .length(11)
-    .pattern(/^09[0-9]{9}$/)
-    .error(createHttpError.BadRequest("شماره موبایل وارد شده صحیح نمیباشد")),
+  phoneNumber: e164PhoneNumber,
 });
 
 const completeProfileSchema = Joi.object({
@@ -44,8 +43,7 @@ const updateProfileSchema = Joi.object({
     .email()
     .error(createHttpError.BadRequest("ایمیل وارد شده صحیح نمی باشد")),
   phoneNumber: Joi.string()
-    .length(11)
-    .pattern(/^09[0-9]{9}$/)
+    .pattern(/^\+[1-9][0-9]{1,14}$/)
     .error(createHttpError.BadRequest("شماره موبایل وارد شده صحیح نمیباشد")),
   biography: Joi.string()
     .max(30)
