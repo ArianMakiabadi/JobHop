@@ -46,6 +46,7 @@ function UserTableRow({ index, user }) {
             userId={user._id}
             onClose={() => setIsOpen(false)}
             status={status}
+            role={role}
           />
         </Modal>
         <button className="btn btn--primary" onClick={() => setIsOpen(true)}>

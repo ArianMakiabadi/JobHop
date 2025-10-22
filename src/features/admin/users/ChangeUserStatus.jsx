@@ -3,6 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import RHFSelect from "../../../UI/RHFSelect";
 import Loading from "../../../UI/Loading";
 import useChangeUserStatus from "./useChangeUserStatus";
+import toast from "react-hot-toast";
 
 const options = [
   {
@@ -19,7 +20,7 @@ const options = [
   },
 ];
 
-function ChangeUserStatus({ status, userId, onClose }) {
+function ChangeUserStatus({ status, userId, onClose, role }) {
   const { isUpdating, changeUserStatus } = useChangeUserStatus();
   const { register, handleSubmit, watch } = useForm({
     defaultValues: {
@@ -28,6 +29,14 @@ function ChangeUserStatus({ status, userId, onClose }) {
   });
   const queryClient = useQueryClient();
   const onSubmit = (data) => {
+    if (data.status === status) {
+      onClose();
+      return;
+    }
+    if (role === "ADMIN") {
+      toast.error("Cannot modify admin accounts!");
+      return;
+    }
     changeUserStatus(
       { userId, ...data },
       {
