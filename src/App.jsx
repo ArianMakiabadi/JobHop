@@ -21,6 +21,7 @@ import Users from "./pages/Users";
 import PendingApproval from "./pages/PendingApproval";
 import { Home } from "./pages/Home";
 import { LearnMore } from "./pages/LearnMore";
+import AdminLogin from "./features/authentication/AdminLogin";
 
 const queryClient = new QueryClient();
 
@@ -77,6 +78,7 @@ function App() {
           <Route path="/*" element={<NotFound />}></Route>
           <Route path="/unauthorized" element={<Unauthorized />}></Route>
           <Route path="/pending" element={<PendingApproval />}></Route>
+          <Route path="/admin-login" element={<AdminLogin />}></Route>
         </Routes>
       </QueryClientProvider>
     </DarkModeProvider>

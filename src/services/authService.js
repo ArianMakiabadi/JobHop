@@ -8,6 +8,10 @@ export function checkOtp(data) {
   return http.post("/user/check-otp", data).then(({ data }) => data.data);
 }
 
+export function adminLogin(data) {
+  return http.post("/user/admin-login", data).then(({ data }) => data.data);
+}
+
 export function completeProfile(data) {
   return http
     .post("/user/complete-profile", data)
