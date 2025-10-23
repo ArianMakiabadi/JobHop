@@ -53,9 +53,16 @@ const updateProfileSchema = Joi.object({
     ),
 });
 
+// Add admin login schema
+const adminLoginSchema = Joi.object({
+  email: Joi.string().trim().lowercase().required().email().error(createHttpError.BadRequest("Invalid email address.")),
+  password: Joi.string().required().min(6).error(createHttpError.BadRequest("Invalid password.")),
+});
+
 module.exports = {
   getOtpSchema,
   completeProfileSchema,
   checkOtpSchema,
   updateProfileSchema,
+  adminLoginSchema,
 };

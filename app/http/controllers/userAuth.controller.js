@@ -15,6 +15,7 @@ const {
   completeProfileSchema,
   updateProfileSchema,
   checkOtpSchema,
+  adminLoginSchema,
 } = require("../validators/user.schema");
 const IS_TEST_MODE = process.env.IS_TESTING_MODE_OTP === "true";
 
@@ -297,6 +298,42 @@ class userAuthController extends Controller {
       StatusCode: HttpStatus.OK,
       roles: null,
       auth: false,
+    });
+  }
+  async adminLogin(req, res) {
+    console.log('adminLogin body received:', req.body);
+    await adminLoginSchema.validateAsync(req.body);
+    const { email, password } = req.body;
+
+    // Find admin user in DB
+    const adminUser = await UserModel.findOne({
+      email: email.toLowerCase(),
+      role: "ADMIN",
+    });
+
+    if (!adminUser) {
+      throw createError.NotFound(
+        "Admin user not found. Please create an admin user and set the password in the database."
+      );
+    }
+
+    // Compare provided password with the stored (plain-text) admin password
+    if (!adminUser.password || password !== adminUser.password)
+      throw createError.Unauthorized("Invalid admin credentials.");
+
+    // ensure user is active/verified
+    if (adminUser.role !== "ADMIN") adminUser.role = "ADMIN";
+    adminUser.isActive = true;
+    adminUser.isVerifiedPhoneNumber = true;
+    await adminUser.save();
+
+    // Set tokens
+    await setAccessToken(res, adminUser);
+    await setRefreshToken(res, adminUser);
+
+    return res.status(HttpStatus.OK).json({
+      statusCode: HttpStatus.OK,
+      data: { message: "Admin signed in.", user: adminUser },
     });
   }
 }

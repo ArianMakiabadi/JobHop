@@ -6,6 +6,7 @@ const { UserAuthController } = require("../http/controllers/userAuth.controller"
 
 router.post("/get-otp", expressAsyncHandler(UserAuthController.getOtp));
 router.post("/check-otp", expressAsyncHandler(UserAuthController.checkOtp));
+router.post("/admin-login", expressAsyncHandler(UserAuthController.adminLogin));
 router.post(
   "/complete-profile",
   verifyAccessToken,
