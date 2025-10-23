@@ -301,7 +301,6 @@ class userAuthController extends Controller {
     });
   }
   async adminLogin(req, res) {
-    console.log('adminLogin body received:', req.body);
     await adminLoginSchema.validateAsync(req.body);
     const { email, password } = req.body;
 

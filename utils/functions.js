@@ -29,9 +29,9 @@ async function setAccessToken(res, user) {
     maxAge: 1000 * 60 * 60 * 24 * 1, // would expire after 1 days
     httpOnly: true, // The cookie only accessible by the web server
     signed: true, // Indicates if the cookie should be signed
-    sameSite: "Lax",
-    secure: process.env.NODE_ENV === "development" ? false : true,
-    domain: process.env.DOMAIN,
+    sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+    secure: process.env.NODE_ENV === "production" ? true : false,
+    // domain: process.env.DOMAIN,
   };
   res.cookie(
     "accessToken",
@@ -71,7 +71,8 @@ function generateToken(user, expiresIn, secret) {
       secret || process.env.TOKEN_SECRET_KEY,
       options,
       (err, token) => {
-        if (err) reject(createError.InternalServerError("Internal server error"));
+        if (err)
+          reject(createError.InternalServerError("Internal server error"));
         resolve(token);
       }
     );
@@ -100,7 +101,8 @@ function verifyRefreshToken(req) {
             otp: 0,
             resetLink: 0,
           });
-          if (!user) reject(createError.Unauthorized("User account not found."));
+          if (!user)
+            reject(createError.Unauthorized("User account not found."));
           return resolve(_id);
         } catch (error) {
           reject(createError.Unauthorized("User account not found."));
