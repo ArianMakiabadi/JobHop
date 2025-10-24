@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "http://localhost:5001/api";
+const BASE_URL = "https://api.makiabadi.com/api";
 
 const app = axios.create({
   baseURL: BASE_URL,
