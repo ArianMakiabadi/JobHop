@@ -46,6 +46,21 @@ export default {
         center: true,
         padding: "1rem",
       },
+      fontFamily: {
+        // Use Nunito as the primary UI font; fall back to common system fonts
+        sans: [
+          "Nunito",
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "Segoe UI",
+          "Roboto",
+          "Helvetica",
+          "Arial",
+          "Noto Sans",
+          "sans-serif",
+        ],
+      },
     },
   },
   plugins: [],
