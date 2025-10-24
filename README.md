@@ -1,16 +1,75 @@
-# React + Vite
+# 🧑‍💼 Freelancing Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack **freelancing website** where **employers** and **freelancers** can connect, collaborate, and manage projects seamlessly.
 
-Currently, two official plugins are available:
+The platform includes **three main panels**, each designed for a specific user role: **Employer**, **Freelancer**, and **Admin**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🌐 **Live Demo:** [https://JobHop.makiabadi.com/](https://JobHop.makiabadi.com/)
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 👔 Employer Panel
 
-## Expanding the ESLint configuration
+Employers can:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Log in to their accounts
+- **Create, edit, and delete projects**
+- View all freelancers who have applied to their projects
+- **Accept or reject** freelancer proposals
+- Manage and update their own account information
+
+---
+
+## 🧑‍💻 Freelancer Panel
+
+Freelancers can:
+
+- Log in to their dedicated dashboard
+- **Browse all available projects** posted by employers
+- Send **proposals** for any project they’re interested in
+- Manage and update their personal account information
+
+---
+
+## 🛠️ Admin Panel
+
+Admins have full access to manage all aspects of the platform, including:
+
+- **User Management:** Approve or reject new user registrations (both employers and freelancers)
+- **Category Management:** Create and manage project categories used by employers
+- **Project Management:** View, create, edit, or remove any project
+- **Proposal Management:** View all proposals submitted by freelancers
+- **Admin Account Settings:** Update admin profile and credentials
+
+---
+
+## ⚙️ Key Features
+
+- 🔑 Multi-role authentication (Admin, Employer, Freelancer)
+- 🧭 Role-based dashboards and permissions
+- 🧾 Project and proposal management workflow
+- 🗂️ Category-based project organization
+- ✅ Secure user verification and approval system
+
+---
+
+## 💡 Future Enhancements
+
+- 💬 Real-time chat between employers and freelancers
+- 💳 Payment gateway integration
+- ⭐ Review and rating system
+- 📧 Email notifications for project updates
+
+---
+
+## 🧰 Tech Stack
+
+| Layer              | Technologies                         |
+| ------------------ | ------------------------------------ |
+| **Frontend**       | React, Vite, JavaScript, TailwindCSS |
+| **Backend**        | Node.js, Express.js                  |
+| **Database**       | MongoDB                              |
+| **Authentication** | Twilio                               |
+| **Deployment**     | Render / Netlify / Mongodb atlas     |
+
+---
