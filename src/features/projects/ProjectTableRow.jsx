@@ -1,7 +1,7 @@
 import { HiOutlineTrash } from "react-icons/hi";
 import Table from "../../UI/Table";
 import toLocalDateShort from "../../utils/toLocalDateShort";
-import truncateText from "../../utils/TruncateText";
+import truncateText from "../../utils/truncateText";
 import { TbPencilMinus } from "react-icons/tb";
 import Modal from "../../UI/Modal";
 import { useState } from "react";

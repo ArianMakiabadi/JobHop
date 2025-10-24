@@ -1,7 +1,7 @@
 import { MdAssignmentAdd } from "react-icons/md";
 import Table from "../../../UI/Table";
 import toLocalDateShort from "../../../utils/toLocalDateShort";
-import truncateText from "../../../utils/TruncateText";
+import truncateText from "../../../utils/truncateText";
 import { useState } from "react";
 import Modal from "../../../UI/Modal";
 import CreateProposals from "../../proposals/CreateProposals";

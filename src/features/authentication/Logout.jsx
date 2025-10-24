@@ -1,5 +1,5 @@
 import { FiLogOut } from "react-icons/fi";
-import useLogout from "./useLogOut";
+import useLogout from "./useLogout";
 import Loading from "../../UI/Loading";
 
 function Logout() {

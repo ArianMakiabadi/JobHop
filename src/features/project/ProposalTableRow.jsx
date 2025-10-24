@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Modal from "../../UI/Modal";
 import Table from "../../UI/Table";
-import truncateText from "../../utils/TruncateText";
 import ChangeProposalStatus from "./ChangeProposalStatus";
+import truncateText from "../../utils/truncateText";
 
 //propsal.status:
 // 0 => rejected

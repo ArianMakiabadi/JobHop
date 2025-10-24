@@ -1,5 +1,5 @@
 import Table from "../../UI/Table";
-import truncateText from "../../utils/TruncateText";
+import truncateText from "../../utils/truncateText";
 
 function ProposalTableRow({ proposal, index }) {
   const { status, description, duration, price } = proposal;

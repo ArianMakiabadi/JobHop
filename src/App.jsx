@@ -8,7 +8,7 @@ import EmployerDashboard from "./pages/EmployerDashboard";
 import Projects from "./pages/Projects";
 import Project from "./pages/Project";
 import { DarkModeProvider } from "./context/DarkModeContext";
-import EmployerLayout from "./features/Employer/EmployerLayout";
+import EmployerLayout from "./features/employer/EmployerLayout";
 import FreelancerDashboard from "./pages/FreelancerDashboard";
 import Proposals from "./pages/Proposals";
 import SubmittedProjects from "./pages/SubmittedProjects";

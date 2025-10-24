@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Modal from "../../../UI/Modal";
 import Table from "../../../UI/Table";
-import truncateText from "../../../utils/TruncateText";
+import truncateText from "../../../utils/truncateText";
 import ChangeUserStatus from "./ChangeUserStatus";
 
 function UserTableRow({ index, user }) {
