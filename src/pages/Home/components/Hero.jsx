@@ -5,9 +5,9 @@ export default function Hero() {
   const navigate = useNavigate();
 
   return (
-    <section className="flex justify-center  min-h-screen px-6 md:px-16 pt-10 md:pt-32 text-center overflow-hidden">
+    <section className="flex justify-center  min-h-screen px-6 md:px-16 pt-10 lg:pt-20 text-center overflow-hidden">
       <div className="max-w-3xl">
-        <h1 className="text-primary-600 font-extrabold text-6xl md:text-9xl mb-5 md:mb-14">
+        <h1 className="text-primary-600 font-extrabold text-6xl lg:text-9xl mb-5 md:mb-14">
           JobHop!
         </h1>
         <h2 className="text-secondary-900 font-bold text-4xl mb-10">
@@ -56,8 +56,8 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-5 sm:bottom-48 left-1/2 -translate-x-1/2">
-        <FiChevronsDown className="w-8 h-8 sm:w-14 md:h-14 text-primary-600 animate-bounce" />
+      <div className="absolute bottom-5 lg:bottom-16 left-1/2 -translate-x-1/2">
+        <FiChevronsDown className="w-8 h-8 md:w-14 md:h-14 text-primary-600 animate-bounce" />
       </div>
     </section>
   );
