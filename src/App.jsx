@@ -19,7 +19,7 @@ import AdminLayout from "./features/admin/AdminLayout";
 import AdminDashboard from "./pages/AdminDashboard";
 import Users from "./pages/Users";
 import PendingApproval from "./pages/PendingApproval";
-import { Home } from "./pages/Home";
+import { Home } from "./pages/Home/Home";
 import { LearnMore } from "./pages/LearnMore";
 import AdminLogin from "./features/authentication/AdminLogin";
 
