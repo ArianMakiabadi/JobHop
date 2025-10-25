@@ -51,7 +51,7 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
   }, [time]);
 
   return (
-    <div className="border shadow-md px-10 pb-10 pt-10 w-[28rem] mx-auto rounded-3xl">
+    <div className="border shadow-md px-10 pb-10 pt-10 mx-auto rounded-3xl">
       <button>
         <HiArrowNarrowLeft
           className="w-6 h-6 mb-4 text-secondary-500"
@@ -59,7 +59,7 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
         />
       </button>
       <form className="space-y-5" onSubmit={checkOtpHandler}>
-        <h2 className="text-center text-secondary-800 font-bold text-3xl">
+        <h2 className="text-center text-secondary-800 font-bold text-3xl md:text-4xl">
           Verify your number
         </h2>
         <p className="text-secondary-600 text-lg">
@@ -70,6 +70,7 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
           value={otp}
           onChange={setOtp}
           numInputs={6}
+          inputType="number"
           renderSeparator={<span>-</span>}
           renderInput={(props) => <input type="text" {...props} />}
           containerStyle="flex gap-x-2 justify-center"

@@ -5,8 +5,8 @@ import "react-international-phone/style.css";
 
 function SendOTPForm({ isSendingOtp, onSubmit, control, validationSchema }) {
   return (
-    <div className="border shadow-md px-10 pb-8 pt-10 w-[28rem] mx-auto rounded-3xl">
-      <h2 className="font-bold text-secondary-700 text-3xl text-center pb-2">
+    <div className="border shadow-md px-10 pb-8 pt-10 mx-auto rounded-3xl">
+      <h2 className="font-bold text-secondary-700 text-3xl md:text-4xl text-center pb-2">
         Login | signup
       </h2>
       <p className="text-secondary-600 mb-6 text-center">
