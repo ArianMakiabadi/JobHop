@@ -5,23 +5,23 @@ export default function Hero() {
   const navigate = useNavigate();
 
   return (
-    <section className="flex justify-center  min-h-screen px-6 md:px-16 pt-16 md:pt-32 text-center overflow-hidden">
+    <section className="flex justify-center  min-h-screen px-6 md:px-16 pt-10 md:pt-32 text-center overflow-hidden">
       <div className="max-w-3xl">
-        <h1 className="text-primary-600 font-extrabold text-8xl md:text-9xl mb-10 md:mb-14">
+        <h1 className="text-primary-600 font-extrabold text-6xl md:text-9xl mb-5 md:mb-14">
           JobHop!
         </h1>
-        <h2 className="text-secondary-900 font-bold text-5xl mb-14">
+        <h2 className="text-secondary-900 font-bold text-4xl mb-10">
           Connects freelancers with top employers
         </h2>
 
-        <p className="text-secondary-500 text-lg md:text-xl md:mb-8">
+        <p className="text-secondary-500 text-base md:text-xl mb-4 md:mb-8">
           Browse projects, showcase your skills, or hire top talents; all in one
           place.
           <br />
           Everything you need for freelance success.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center pt-10 md:pt-0">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-3">
           <button
             onClick={() => navigate("/auth")}
             className="inline-flex items-center gap-2 rounded-full bg-primary-600 px-8 py-3 text-secondary-0 text-lg font-medium transition hover:bg-primary-700 focus:outline-none focus:ring-4 focus:ring-primary-200"
@@ -41,22 +41,22 @@ export default function Hero() {
         <div className="pt-4 md:pt-12 grid grid-cols-3 gap-6 text-center text-2xl md:text-3xl font-bold text-primary-600">
           <div>
             <span className="block ">500+</span>
-            <span className="block text-secondary-600 text-sm">
+            <span className="block text-secondary-600 text-xs">
               Freelancers
             </span>
           </div>
           <div>
             <span className="block ">100+</span>
-            <span className="block text-secondary-600 text-sm">Projects</span>
+            <span className="block text-secondary-600 text-xs">Projects</span>
           </div>
           <div>
             <span className="block ">50+</span>
-            <span className="block text-secondary-600 text-sm">Employers</span>
+            <span className="block text-secondary-600 text-xs">Employers</span>
           </div>
         </div>
       </div>
 
-      <div className="absolute bottom-10 sm:bottom-48 left-1/2 -translate-x-1/2">
+      <div className="absolute bottom-5 sm:bottom-48 left-1/2 -translate-x-1/2">
         <FiChevronsDown className="w-8 h-8 sm:w-14 md:h-14 text-primary-600 animate-bounce" />
       </div>
     </section>
