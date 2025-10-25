@@ -51,7 +51,7 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
   }, [time]);
 
   return (
-    <div className="border shadow-md px-10 pb-10 pt-10 mx-auto rounded-3xl">
+    <div className="border shadow-md px-6 py-8 mx-auto rounded-3xl">
       <button>
         <HiArrowNarrowLeft
           className="w-6 h-6 mb-4 text-secondary-500"
@@ -62,7 +62,7 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
         <h2 className="text-center text-secondary-800 font-bold text-3xl md:text-4xl">
           Verify your number
         </h2>
-        <p className="text-secondary-600 text-lg">
+        <p className="text-secondary-500 text-lg text-center">
           Enter the 6-digit code we sent to your phone
         </p>
         <OTPInput
@@ -75,7 +75,7 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
           renderInput={(props) => <input type="text" {...props} />}
           containerStyle="flex gap-x-1 md:gap-x-2 justify-center"
           inputStyle={{
-            width: "2.5rem",
+            width: "2.3rem",
             padding: "0.5rem 0.2rem",
             border: "1px solid rgb(var(--color-primary-400))",
             borderRadius: "0.5rem",
