@@ -23,9 +23,7 @@ function UsersTable() {
       <Table.Body>
         {users.map(
           (user, index) =>
-            user.isActive && (
-              <UserTableRow key={user._id} index={index} user={user} />
-            )
+            user && <UserTableRow key={user._id} index={index} user={user} />
         )}
       </Table.Body>
     </Table>
