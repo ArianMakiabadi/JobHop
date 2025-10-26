@@ -8,7 +8,7 @@ function TextField({
   required,
 }) {
   return (
-    <div className="relative mt-6">
+    <div className={`relative ${label ? "mt-6" : ""}`}>
       <input
         {...register(name, validationSchema)}
         id={name}

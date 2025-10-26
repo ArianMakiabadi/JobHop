@@ -2,7 +2,7 @@ import { HiCollection, HiHome } from "react-icons/hi";
 import AppLayout from "../../UI/AppLayout";
 import CustomNavLink from "../../UI/CustomNavLink";
 import SideBar from "../../UI/SideBar";
-import { FiFileText } from "react-icons/fi";
+import { FiFileText, FiSettings } from "react-icons/fi";
 
 function FreelancerLayout() {
   return (
@@ -21,6 +21,10 @@ function FreelancerLayout() {
         <CustomNavLink to={"proposals"}>
           <FiFileText />
           <span>Proposals</span>
+        </CustomNavLink>
+        <CustomNavLink to={"edit-profile"}>
+          <FiSettings />
+          <span>Edit Profile</span>
         </CustomNavLink>
       </SideBar>
     </AppLayout>

@@ -1,4 +1,10 @@
-import { FiFileText, FiFolder, FiHome, FiUsers } from "react-icons/fi";
+import {
+  FiFileText,
+  FiFolder,
+  FiHome,
+  FiSettings,
+  FiUsers,
+} from "react-icons/fi";
 import AppLayout from "../../UI/AppLayout";
 import SideBar from "../../UI/SideBar";
 import CustomNavLink from "../../UI/CustomNavLink";
@@ -25,6 +31,11 @@ function AdminLayout() {
         <CustomNavLink to={"proposals"}>
           <FiFileText />
           <span>Proposals</span>
+        </CustomNavLink>
+
+        <CustomNavLink to={"edit-profile"}>
+          <FiSettings />
+          <span>Edit Profile</span>
         </CustomNavLink>
       </SideBar>
     </AppLayout>

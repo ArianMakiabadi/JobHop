@@ -35,3 +35,7 @@ export function changeUserStatusApi({ userId, ...rest }) {
     .patch(`/admin/user/verify/${userId}`, rest)
     .then(({ data }) => data.data);
 }
+
+export function editProfileApi(data) {
+  return http.patch("/user/update", data).then(({ data }) => data.data);
+}

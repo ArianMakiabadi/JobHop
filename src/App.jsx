@@ -22,6 +22,7 @@ import PendingApproval from "./pages/PendingApproval";
 import { Home } from "./pages/Home/Home";
 import { LearnMore } from "./pages/LearnMore";
 import AdminLogin from "./features/authentication/AdminLogin";
+import EditProfile from "./features/user/EditProfile";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,12 @@ function App() {
         <Routes>
           <Route path="/auth" element={<Auth />}></Route>
           <Route path="/complete-profile" element={<CompleteProfile />}></Route>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/learn-more" element={<LearnMore />}></Route>
+          <Route path="/*" element={<NotFound />}></Route>
+          <Route path="/unauthorized" element={<Unauthorized />}></Route>
+          <Route path="/pending" element={<PendingApproval />}></Route>
+          <Route path="/admin-login" element={<AdminLogin />}></Route>
           <Route
             path="/employer"
             element={
@@ -45,6 +52,7 @@ function App() {
             <Route path="dashboard" element={<EmployerDashboard />} />
             <Route path="projects" element={<Projects />} />
             <Route path="projects/:id" element={<Project />} />
+            <Route path="edit-profile" element={<EditProfile />} />
           </Route>
           <Route
             path="/freelancer"
@@ -58,6 +66,7 @@ function App() {
             <Route path="dashboard" element={<FreelancerDashboard />}></Route>
             <Route path="proposals" element={<Proposals />}></Route>
             <Route path="projects" element={<SubmittedProjects />}></Route>
+            <Route path="edit-profile" element={<EditProfile />} />
           </Route>
           <Route
             path="/admin"
@@ -72,13 +81,8 @@ function App() {
             <Route path="users" element={<Users />}></Route>
             <Route path="projects" element={<SubmittedProjects />}></Route>
             <Route path="proposals" element={<Proposals />}></Route>
+            <Route path="edit-profile" element={<EditProfile />} />
           </Route>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/learn-more" element={<LearnMore />}></Route>
-          <Route path="/*" element={<NotFound />}></Route>
-          <Route path="/unauthorized" element={<Unauthorized />}></Route>
-          <Route path="/pending" element={<PendingApproval />}></Route>
-          <Route path="/admin-login" element={<AdminLogin />}></Route>
         </Routes>
       </QueryClientProvider>
     </DarkModeProvider>
