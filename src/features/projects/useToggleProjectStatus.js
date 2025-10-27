@@ -11,6 +11,7 @@ export default function useToggleProjectStatus() {
       queryClient.invalidateQueries({
         queryKey: ["employer-projects"],
       });
+      queryClient.invalidateQueries({ queryKey: ["projects"] });
     },
     onError: (err) => {
       toast.error(err?.response?.data?.message);

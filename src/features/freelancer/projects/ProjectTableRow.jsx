@@ -5,16 +5,9 @@ import truncateText from "../../../utils/truncateText";
 import { useState } from "react";
 import Modal from "../../../UI/Modal";
 import CreateProposals from "../../proposals/CreateProposals";
-import useUser from "../../authentication/useUser";
-import { FiTrash } from "react-icons/fi";
-import useRemoveProject from "../../projects/useRemoveProject";
-import ConfirmDelete from "../../../UI/ConfirmDelete";
 
 function ProjectTableRow({ project, index }) {
-  const [isApplyOpen, setIsApplyOpen] = useState(false);
-  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const { user } = useUser();
-  const { removeProject } = useRemoveProject();
+  const [isOpen, setIsOpen] = useState(false);
   const { status, category, title, budget, deadline } = project;
   const projectStatus = {
     OPEN: {
@@ -39,45 +32,21 @@ function ProjectTableRow({ project, index }) {
           {projectStatus[status].label}
         </span>
       </td>
-      {user.role === "EMPLOYER" ? (
-        <td>
-          <button onClick={() => setIsApplyOpen(true)}>
-            <MdAssignmentAdd className="w-5 h-5 text-primary-600" />
-          </button>
-          <Modal
-            open={isApplyOpen}
-            onClose={() => setIsApplyOpen(false)}
-            title="Contact the employer"
-          >
-            <CreateProposals
-              onClose={() => setIsApplyOpen(false)}
-              projectId={project._id}
-            />
-          </Modal>
-        </td>
-      ) : (
-        <td>
-          <button onClick={() => setIsDeleteOpen(true)}>
-            <FiTrash className="w-5 h-5 text-error" />
-          </button>
-          <Modal
-            open={isDeleteOpen}
-            onClose={() => setIsDeleteOpen(false)}
-            title={`Deleting ${project.title}`}
-          >
-            <ConfirmDelete
-              resourceName={project.title}
-              onClose={() => setIsDeleteOpen(false)}
-              onConfirm={() =>
-                removeProject(project._id, {
-                  onSuccess: setIsDeleteOpen(false),
-                })
-              }
-              disabled={false}
-            />
-          </Modal>
-        </td>
-      )}
+      <td>
+        <button onClick={() => setIsOpen(true)}>
+          <MdAssignmentAdd className="w-5 h-5 text-primary-600" />
+        </button>
+        <Modal
+          open={isOpen}
+          onClose={() => setIsOpen(false)}
+          title="Contact the employer"
+        >
+          <CreateProposals
+            onClose={() => setIsOpen(false)}
+            projectId={project._id}
+          />
+        </Modal>
+      </td>
     </Table.Row>
   );
 }

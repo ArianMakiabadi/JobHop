@@ -1,11 +1,9 @@
-import useEmployerProjects from "./useEmployerProjects";
 import Loading from "../../UI/Loading";
 import Empty from "../../UI/Empty";
 import Table from "../../UI/Table";
 import ProjectTableRow from "./ProjectTableRow";
 
-function ProjectsTable() {
-  const { isLoading, projects } = useEmployerProjects();
+function ProjectsTable({ isLoading, projects }) {
   if (isLoading) return <Loading />;
   if (!projects.length) return <Empty resourceName="projects" />;
   return (

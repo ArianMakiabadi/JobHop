@@ -5,7 +5,6 @@ import { Toaster } from "react-hot-toast";
 import CompleteProfile from "./pages/CompleteProfile";
 import NotFound from "./pages/NotFound";
 import EmployerDashboard from "./pages/EmployerDashboard";
-import Projects from "./pages/Projects";
 import Project from "./pages/Project";
 import { DarkModeProvider } from "./context/DarkModeContext";
 import EmployerLayout from "./features/employer/EmployerLayout";
@@ -50,7 +49,7 @@ function App() {
           >
             <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<EmployerDashboard />} />
-            <Route path="projects" element={<Projects />} />
+            <Route path="projects" element={<SubmittedProjects />} />
             <Route path="projects/:id" element={<Project />} />
             <Route path="edit-profile" element={<EditProfile />} />
           </Route>
@@ -80,6 +79,7 @@ function App() {
             <Route path="dashboard" element={<AdminDashboard />}></Route>
             <Route path="users" element={<Users />}></Route>
             <Route path="projects" element={<SubmittedProjects />}></Route>
+            <Route path="projects/:id" element={<Project />} />
             <Route path="proposals" element={<Proposals />}></Route>
             <Route path="edit-profile" element={<EditProfile />} />
           </Route>

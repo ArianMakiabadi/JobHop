@@ -7,12 +7,14 @@ export default function useEditProject() {
   const { isPending: isEditing, mutate: editProject } = useMutation({
     mutationFn: editProjectApi,
     onSuccess: () => {
-      toast.success("Project updated!");
-
       //invalidating the previous projects to update the value
       queryClient.invalidateQueries({
         queryKey: ["employer-projects"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["projects"],
+      });
+      toast.success("Project updated!");
     },
     onError: (err) => {
       toast.error(err?.response?.data?.message);

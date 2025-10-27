@@ -7,12 +7,14 @@ export default function useRemoveProject() {
   const { mutate: removeProject, isPending: isDeleting } = useMutation({
     mutationFn: removeProjectApi,
     onSuccess: () => {
-      toast.success("Project deleted!");
-
       //invalidating the previous projects to update the value
       queryClient.invalidateQueries({
         queryKey: ["employer-projects"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["projects"],
+      });
+      toast.success("Project deleted!");
     },
     onError: (err) => {
       toast.error(err?.response?.data?.message);
