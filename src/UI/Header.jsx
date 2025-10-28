@@ -6,12 +6,12 @@ function Header() {
   const { isLoading } = useUser();
 
   return (
-    <div className="flex items-center bg-secondary-0 py-2 xl:px-4 border-b border-secondary-100">
+    <div className="flex items-center justify-between bg-secondary-0 py-2 xl:px-8 border-b border-secondary-100">
       <p className="hidden xl:block text-primary-800 font-extrabold text-3xl">
         JobHop!
       </p>
       <div
-        className={`container xl:max-w-screen-xl flex items-center justify-end h-6 gap-x-8
+        className={` xl:max-w-screen-xl flex items-center justify-end h-6 gap-x-8
           ${isLoading ? "blur-sm opacity-30" : ""}
           `}
       >
