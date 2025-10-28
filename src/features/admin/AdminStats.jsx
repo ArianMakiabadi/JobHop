@@ -1,7 +1,7 @@
-import { FiFileText, FiFolder, FiUsers } from "react-icons/fi";
+import { FiFileText, FiFolder, FiTag, FiUsers } from "react-icons/fi";
 import Stat from "../../UI/Stat";
 
-function AdminStats({ users, proposals, projects }) {
+function AdminStats({ users, proposals, projects, categories }) {
   return (
     <div className="grid grid-cols-3 gap-x-4 gap-y-2">
       <Stat
@@ -21,6 +21,12 @@ function AdminStats({ users, proposals, projects }) {
         value={projects}
         title="Projects"
         icon={<FiFolder className="w-16 h-16" />}
+      />
+      <Stat
+        color="blue"
+        value={categories}
+        title="Categories"
+        icon={<FiTag className="w-16 h-16" />}
       />
     </div>
   );

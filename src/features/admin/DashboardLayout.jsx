@@ -1,3 +1,4 @@
+import useCategories from "../../hooks/useCategories";
 import useProjects from "../../hooks/useProjects";
 import Loading from "../../UI/Loading";
 import useProposals from "../proposals/useProposals";
@@ -9,8 +10,14 @@ function DashboardLayout() {
   const { isLoading: isProposalsLoading, proposals } = useProposals();
   const { isLoading: isProjectsLoading, projects } = useProjects();
   const { isLoading: isUsersLoading, users } = useUsers();
+  const { isLoading: isCategoriesLoading, categories } = useCategories();
 
-  if (isProposalsLoading || isProjectsLoading || isUsersLoading)
+  if (
+    isProposalsLoading ||
+    isProjectsLoading ||
+    isUsersLoading ||
+    isCategoriesLoading
+  )
     return <Loading />;
 
   return (
@@ -20,6 +27,7 @@ function DashboardLayout() {
         proposals={proposals.length}
         projects={projects.length}
         users={users.length}
+        categories={categories.length}
       />
     </div>
   );
