@@ -15,13 +15,13 @@ function Stat({ icon, title, value, color }) {
         >
           {icon}
         </div>
-        <h5 className="font-bold text-lg text-secondary-600 self-center">
+        <h5 className="font-semibold text-secondary-600 text-sm sm:text-base self-center">
           {title}
         </h5>
-        <p className="font-bold text-3xl text-secondary-900">{value}</p>
+        <p className="font-bold text-2xl sm:text-3xl text-secondary-900">
+          {value}
+        </p>
       </div>
-      <div className="col-span-1"></div>
-      <div className="col-span-1"></div>
     </div>
   );
 }

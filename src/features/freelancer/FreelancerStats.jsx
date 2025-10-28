@@ -11,24 +11,33 @@ function FreelancerStats({ proposals }) {
   );
 
   return (
-    <div className="grid grid-cols-3 gap-x-4 gap-y-2">
+    <div
+      className="
+        grid 
+        grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 
+        gap-4"
+    >
       <Stat
         color="primary"
         value={countOfProposals}
         title="Total submitted proposals"
-        icon={<FiClipboard className="w-16 h-16" />}
+        icon={
+          <FiClipboard className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16" />
+        }
       />
       <Stat
         color="yellow"
         value={countAcceptedProposals}
         title="Accepted proposals"
-        icon={<FiAward className="w-16 h-16" />}
+        icon={<FiAward className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16" />}
       />
       <Stat
         color="green"
         value={`${expectedPayout} €`}
         title="Expected earnings"
-        icon={<FiDollarSign className="w-16 h-16" />}
+        icon={
+          <FiDollarSign className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16" />
+        }
       />
     </div>
   );
