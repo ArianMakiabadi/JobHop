@@ -22,6 +22,7 @@ import { Home } from "./pages/Home/Home";
 import { LearnMore } from "./pages/LearnMore";
 import AdminLogin from "./features/authentication/AdminLogin";
 import EditProfile from "./features/user/EditProfile";
+import Categories from "./pages/Categories";
 
 const queryClient = new QueryClient();
 
@@ -81,6 +82,7 @@ function App() {
             <Route path="projects" element={<SubmittedProjects />}></Route>
             <Route path="projects/:id" element={<Project />} />
             <Route path="proposals" element={<Proposals />}></Route>
+            <Route path="categories" element={<Categories />} />
             <Route path="edit-profile" element={<EditProfile />} />
           </Route>
         </Routes>

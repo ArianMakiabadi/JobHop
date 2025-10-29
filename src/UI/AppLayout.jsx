@@ -52,7 +52,7 @@ function AppLayout({ children }) {
 
         {/* Main Content */}
         <div className="bg-secondary-100 p-6 overflow-y-auto">
-          <div className="mx-auto max-w-screen-xl flex flex-col gap-y-12">
+          <div className="mx-auto max-w-screen-xl flex flex-col gap-y-6 xl:gap-y-10">
             <Outlet />
           </div>
         </div>

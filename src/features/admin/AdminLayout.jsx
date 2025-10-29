@@ -8,6 +8,7 @@ import {
 import AppLayout from "../../UI/AppLayout";
 import SideBar from "../../UI/SideBar";
 import CustomNavLink from "../../UI/CustomNavLink";
+import { BiCategory } from "react-icons/bi";
 
 function AdminLayout() {
   return (
@@ -31,6 +32,11 @@ function AdminLayout() {
         <CustomNavLink to={"proposals"}>
           <FiFileText />
           <span>Proposals</span>
+        </CustomNavLink>
+
+        <CustomNavLink to={"categories"}>
+          <BiCategory />
+          <span>Categories</span>
         </CustomNavLink>
 
         <CustomNavLink to={"edit-profile"}>
