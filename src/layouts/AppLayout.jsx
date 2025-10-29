@@ -1,14 +1,8 @@
-import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import Header from "./Header";
+import Header from "../UI/Header";
 import { FiMenu } from "react-icons/fi";
 
-function AppLayout({ children }) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-  const closeSidebar = () => setIsSidebarOpen(false);
-
+function AppLayout({ children, isSidebarOpen, toggleSidebar }) {
   return (
     <div className="relative h-screen overflow-hidden">
       {/* Header */}
@@ -45,7 +39,7 @@ function AppLayout({ children }) {
         {/* Overlay on mobile */}
         {isSidebarOpen && (
           <div
-            onClick={closeSidebar}
+            onClick={toggleSidebar}
             className="fixed inset-0 bg-black bg-opacity-40 z-30 xl:hidden"
           ></div>
         )}
