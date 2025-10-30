@@ -30,6 +30,7 @@ function AppLayout({ children, isSidebarOpen, toggleSidebar }) {
             transition-transform duration-300 ease-in-out
             ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
             xl:relative xl:translate-x-0 xl:w-[15rem]
+            rounded-tr-2xl rounded-br-2xl overflow-hidden xl:rounded-none xl:overflow-visible
           `}
         >
           {/* Close on mobile click */}
@@ -40,7 +41,7 @@ function AppLayout({ children, isSidebarOpen, toggleSidebar }) {
         {isSidebarOpen && (
           <div
             onClick={toggleSidebar}
-            className="fixed inset-0 bg-black bg-opacity-40 z-30 xl:hidden"
+            className="fixed inset-0 bg-secondary-500 bg-opacity-40 z-30 xl:hidden"
           ></div>
         )}
 
