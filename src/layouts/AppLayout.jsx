@@ -13,7 +13,7 @@ function AppLayout({ children, isSidebarOpen, toggleSidebar }) {
             onClick={toggleSidebar}
             className="p-2 rounded-md hover:bg-secondary-100 transition"
           >
-            <FiMenu size={22} />
+            <FiMenu className="text-secondary-500" size={22} />
           </button>
           <Header />
         </div>
