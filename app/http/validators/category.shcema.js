@@ -7,7 +7,9 @@ const addCategorySchema = Joi.object({
     .required()
     .min(3)
     .max(100)
-    .error(createHttpError.BadRequest("The category title (Persian) is invalid.")),
+    .error(
+      createHttpError.BadRequest("The category title (Persian) is invalid.")
+    ),
   englishTitle: Joi.string()
     .required()
     .min(3)
@@ -36,7 +38,9 @@ const updateCategorySchema = Joi.object({
   title: Joi.string()
     .min(3)
     .max(100)
-    .error(createHttpError.BadRequest("The category title (Persian) is invalid.")),
+    .error(
+      createHttpError.BadRequest("The category title (Persian) is invalid.")
+    ),
   englishTitle: Joi.string()
     .min(3)
     .max(100)
@@ -52,7 +56,7 @@ const updateCategorySchema = Joi.object({
     .required()
     .min(3)
     .max(100)
-    .valid("product", "post", "comment", "ticket")
+    .valid("project", "post", "comment", "ticket")
     .error(createHttpError.BadRequest("The category type is invalid.")),
 });
 
