@@ -38,7 +38,7 @@ const CreateCategoryForm = ({ onClose, categoryToEdit = {} }) => {
 
     if (isEditMode) {
       editCategory(
-        { id: categoryToEditId, newCategory },
+        { id: categoryToEditId, data: newCategory },
         {
           onSuccess: () => {
             onClose();
