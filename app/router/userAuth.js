@@ -2,11 +2,14 @@ const router = require("express").Router();
 const expressAsyncHandler = require("express-async-handler");
 // const { uploadFile } = require("../../utils/multer");
 const { verifyAccessToken } = require("../http/middlewares/user.middleware");
-const { UserAuthController } = require("../http/controllers/userAuth.controller");
+const {
+  UserAuthController,
+} = require("../http/controllers/userAuth.controller");
 
 router.post("/get-otp", expressAsyncHandler(UserAuthController.getOtp));
 router.post("/check-otp", expressAsyncHandler(UserAuthController.checkOtp));
 router.post("/admin-login", expressAsyncHandler(UserAuthController.adminLogin));
+router.post("/demo-login", expressAsyncHandler(UserAuthController.demoLogin));
 router.post(
   "/complete-profile",
   verifyAccessToken,

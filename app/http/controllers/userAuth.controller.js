@@ -335,6 +335,38 @@ class userAuthController extends Controller {
       data: { message: "Admin signed in.", user: adminUser },
     });
   }
+
+  async demoLogin(req, res) {
+    await adminLoginSchema.validateAsync(req.body);
+    const { email, password } = req.body;
+
+    // Find user in DB by email (no role check)
+    const user = await UserModel.findOne({
+      email: email.toLowerCase(),
+    });
+
+    if (!user) {
+      throw createError.NotFound("User not found. Please check your email.");
+    }
+
+    // Compare provided password with the stored password
+    if (!user.password || password !== user.password)
+      throw createError.Unauthorized("Invalid credentials.");
+
+    // ensure user is active/verified
+    user.isActive = true;
+    user.isVerifiedPhoneNumber = true;
+    await user.save();
+
+    // Set tokens
+    await setAccessToken(res, user);
+    await setRefreshToken(res, user);
+
+    return res.status(HttpStatus.OK).json({
+      statusCode: HttpStatus.OK,
+      data: { message: "User signed in.", user },
+    });
+  }
 }
 
 module.exports = {
