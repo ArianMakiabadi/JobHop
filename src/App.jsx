@@ -21,6 +21,7 @@ import PendingApproval from "./pages/PendingApproval";
 import { Home } from "./pages/Home/Home";
 import { LearnMore } from "./pages/LearnMore";
 import AdminLogin from "./features/authentication/AdminLogin";
+import DemoLogin from "./features/authentication/DemoLogin";
 import EditProfile from "./features/user/EditProfile";
 import Categories from "./pages/Categories";
 
@@ -40,6 +41,7 @@ function App() {
           <Route path="/unauthorized" element={<Unauthorized />}></Route>
           <Route path="/pending" element={<PendingApproval />}></Route>
           <Route path="/admin-login" element={<AdminLogin />}></Route>
+          <Route path="/demo-login" element={<DemoLogin />}></Route>
           <Route
             path="/employer"
             element={
