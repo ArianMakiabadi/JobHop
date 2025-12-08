@@ -89,6 +89,66 @@ function DemoLogin() {
           </form>
         </div>
       </div>
+
+      <div className="flex justify-center pt-8 pb-6">
+        <div className="w-[28rem]">
+          <div className="bg-primary-500 rounded-2xl p-4 text-secondary-0">
+            <h3 className="font-semibold text-base mb-3">Demo Accounts</h3>
+            <div className="space-y-2">
+              {[
+                {
+                  role: "Admin",
+                  email: "admin@jobhop.com",
+                  password: "12345678",
+                  icon: "👤",
+                },
+                {
+                  role: "Employer",
+                  email: "employer@jobhop.com",
+                  password: "12345678",
+                  icon: "💼",
+                },
+                {
+                  role: "Freelancer",
+                  email: "freelancer@jobhop.com",
+                  password: "12345678",
+                  icon: "💻",
+                },
+              ].map((account, idx) => (
+                <div
+                  key={idx}
+                  className="bg-primary-400 backdrop-blur-sm rounded-lg p-2.5 hover:bg-primary-300 transition-all"
+                >
+                  <div className="flex items-start gap-2">
+                    <span className="text-lg flex-shrink-0">
+                      {account.icon}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-bold mb-1 text-secondary-0">
+                        {account.role}
+                      </p>
+                      <div className="space-y-0.5 text-sm">
+                        <div className="flex items-center justify-between">
+                          <span className="text-secondary-100">Email:</span>
+                          <span className="truncate ml-2 text-secondary-0 font-medium">
+                            {account.email}
+                          </span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-secondary-100">Password:</span>
+                          <span className="text-secondary-0 font-medium">
+                            {account.password}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
