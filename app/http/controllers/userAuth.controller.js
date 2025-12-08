@@ -351,7 +351,7 @@ class userAuthController extends Controller {
 
     // Compare provided password with the stored password
     if (!user.password || password !== user.password)
-      throw createError.Unauthorized("Invalid credentials.");
+      throw createError.Unauthorized("Invalid password.");
 
     // ensure user is active/verified
     user.isActive = true;
