@@ -62,7 +62,7 @@ class userAuthController extends Controller {
 
     const user = await UserModel.findOne(
       { phoneNumber },
-      { password: 0, refreshToken: 0, accessToken: 0 }
+      { password: 0, refreshToken: 0, accessToken: 0 },
     );
 
     if (!user) throw createError.NotFound("User not found");
@@ -78,7 +78,7 @@ class userAuthController extends Controller {
       try {
         const client = twilio(
           process.env.TWILIO_ACCOUNT_SID,
-          process.env.TWILIO_AUTH_TOKEN
+          process.env.TWILIO_AUTH_TOKEN,
         );
         if (!phoneNumber || typeof phoneNumber !== "string")
           throw createError.BadRequest("Invalid phone number");
@@ -86,7 +86,7 @@ class userAuthController extends Controller {
         if (!phoneNumber.startsWith("+"))
           console.warn(
             "Phone number not in E.164 format, Verify may reject it:",
-            phoneNumber
+            phoneNumber,
           );
 
         const verificationCheck = await client.verify
@@ -100,7 +100,7 @@ class userAuthController extends Controller {
       } catch (err) {
         console.error(
           "Twilio Verify error:",
-          err && err.message ? err.message : err
+          err && err.message ? err.message : err,
         );
         throw createError.InternalServerError("Verification provider error");
       }
@@ -148,7 +148,7 @@ class userAuthController extends Controller {
     });
     const updatedResult = await UserModel.updateOne(
       { phoneNumber },
-      { $set: objectData }
+      { $set: objectData },
     );
     return !!updatedResult.modifiedCount;
   }
@@ -158,7 +158,7 @@ class userAuthController extends Controller {
     try {
       const client = twilio(
         process.env.TWILIO_ACCOUNT_SID,
-        process.env.TWILIO_AUTH_TOKEN
+        process.env.TWILIO_AUTH_TOKEN,
       );
       console.log("Calling Twilio Verify services with:", {
         service: process.env.TWILIO_VERIFY_SID,
@@ -190,13 +190,15 @@ class userAuthController extends Controller {
           });
         })
         .catch((err) => {
-          console.error(
-            "Twilio Verify send error:",
-            err && err.message ? err.message : err
-          );
+          console.error("Twilio Verify send error:", {
+            message: err?.message,
+            status: err?.status,
+            code: err?.code,
+            moreInfo: err?.moreInfo,
+          });
           return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
             statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
-            message: "Failed to send verification code",
+            message: "Please use a real phone number!",
           });
         });
     } catch (err) {
@@ -223,7 +225,7 @@ class userAuthController extends Controller {
     const updatedUser = await UserModel.findOneAndUpdate(
       { _id: user._id },
       { $set: { name, email, isActive: true, role } },
-      { new: true }
+      { new: true },
     );
     // await setAuthCookie(res, updatedUser);
     await setAccessToken(res, updatedUser);
@@ -246,7 +248,7 @@ class userAuthController extends Controller {
       { _id: userId },
       {
         $set: { name, email, biography, phoneNumber },
-      }
+      },
     );
     if (!updateResult.modifiedCount === 0)
       throw createError.BadRequest("Information was not updated.");
@@ -312,7 +314,7 @@ class userAuthController extends Controller {
 
     if (!adminUser) {
       throw createError.NotFound(
-        "Admin user not found. Please create an admin user and set the password in the database."
+        "Admin user not found. Please create an admin user and set the password in the database.",
       );
     }
 
