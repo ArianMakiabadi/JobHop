@@ -6,6 +6,10 @@ The platform includes **three main panels**, each designed for a specific user r
 
 🌐 **Live Demo:** [https://JobHop.makiabadi.com/](https://JobHop.makiabadi.com/)
 
+### 🔐 Demo Login
+
+You can test the platform using demo accounts without creating a new account. Visit the [Demo Login Page](https://jobhop.makiabadi.com/demo-login) or select the demo login option on the authentication page to explore the features with pre-configured demo credentials for different user roles (Admin, Employer, and Freelancer).
+
 ---
 
 ## 👔 Employer Panel
