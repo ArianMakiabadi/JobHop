@@ -159,6 +159,13 @@
   .btn--secondary {
     @apply bg-secondary-600 text-secondary-100 hover:bg-primary-700 shadow-md shadow-secondary-300;
   }
+  .btn--outline {
+    @apply border border-primary-600 bg-transparent text-primary-600 hover:bg-primary-600 hover:text-secondary-100 shadow-md shadow-primary-100;
+  }
+
+  .dark-mode .btn--outline {
+    @apply border border-primary-400 bg-transparent text-primary-400 hover:bg-primary-400 hover:text-secondary-800 shadow-md shadow-primary-100;
+  }
   .btn--danger {
     @apply bg-red-600 text-secondary-100 hover:bg-red-700 shadow-md shadow-red-300;
   }
