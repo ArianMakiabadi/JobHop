@@ -9,7 +9,7 @@ export default function useChangeProposalStatus() {
       toast.success("Status updated!");
     },
     onError: (err) => {
-      toast.error(err?.response?.data?.message);
+      toast.error(err.response?.data?.message ?? "Something went wrong");
     },
   });
   return { isUpdating, changeProposalStatus };

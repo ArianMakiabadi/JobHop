@@ -12,8 +12,8 @@ export default function useEditProfile() {
         queryKey: ["user"],
       });
     },
-    onError: (data) => {
-      toast.error(data.message);
+    onError: (err) => {
+      toast.error(err.message);
     },
   });
 
