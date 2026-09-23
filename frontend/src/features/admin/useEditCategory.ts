@@ -11,7 +11,8 @@ const useEditCategory = () => {
       toast.success(data.message);
       query.invalidateQueries({ queryKey: ["categories"] });
     },
-    onError: (err) => toast.error(err?.response?.data?.message),
+    onError: (err) =>
+      toast.error(err.response?.data?.message ?? "Something went wrong"),
   });
 
   return { isEditing, editCategory };

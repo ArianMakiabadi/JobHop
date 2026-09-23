@@ -7,7 +7,8 @@ export default function useProject() {
 
   const { data, isLoading } = useQuery({
     queryKey: ["project", id],
-    queryFn: () => getProjectApi(id),
+    queryFn: () => getProjectApi(id!), // `enabled` guarantees id is defined
+    enabled: !!id,
     retry: false,
   });
 

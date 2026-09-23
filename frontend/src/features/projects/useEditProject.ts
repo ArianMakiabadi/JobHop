@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { removeProjectApi } from "../../services/projectService";
+import { editProjectApi } from "../../services/projectService";
 import toast from "react-hot-toast";
 
-export default function useRemoveProject() {
+export default function useEditProject() {
   const queryClient = useQueryClient();
-  const { mutate: removeProject, isPending: isDeleting } = useMutation({
-    mutationFn: removeProjectApi,
+  const { isPending: isEditing, mutate: editProject } = useMutation({
+    mutationFn: editProjectApi,
     onSuccess: () => {
       //invalidating the previous projects to update the value
       queryClient.invalidateQueries({
@@ -14,12 +14,11 @@ export default function useRemoveProject() {
       queryClient.invalidateQueries({
         queryKey: ["projects"],
       });
-      toast.success("Project deleted!");
+      toast.success("Project updated!");
     },
     onError: (err) => {
-      toast.error(err?.response?.data?.message);
+      toast.error(err.response?.data?.message ?? "Something went wrong");
     },
   });
-
-  return { removeProject, isDeleting };
+  return { isEditing, editProject };
 }
