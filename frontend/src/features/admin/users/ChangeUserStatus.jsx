@@ -56,7 +56,7 @@ function ChangeUserStatus({ status, userId, onClose, role }) {
           register={register}
           options={options}
           watch={watch}
-          requierd
+          required
         />
         <div className="mt-4">
           {isUpdating ? (

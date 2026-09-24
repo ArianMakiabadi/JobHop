@@ -1,9 +1,15 @@
 import { useSearchParams } from "react-router-dom";
+import type { SelectOption } from "../types";
 
-function Filter({ paramKey, options }) {
+interface FilterProps {
+  paramKey: string;
+  options: SelectOption[];
+}
+
+function Filter({ paramKey, options }: FilterProps) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const currentFilter = searchParams.get(paramKey) || options.at(0).value;
-  const handleClick = (value) => {
+  const currentFilter = searchParams.get(paramKey) || options.at(0)?.value;
+  const handleClick = (value: string) => {
     const newParams = new URLSearchParams(searchParams);
     newParams.set(paramKey, value);
     setSearchParams(newParams);

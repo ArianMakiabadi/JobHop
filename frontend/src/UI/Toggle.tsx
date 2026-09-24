@@ -1,6 +1,11 @@
 import { Switch } from "@headlessui/react";
 
-function Toggle({ checked, onChange }) {
+interface ToggleProps {
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+}
+
+function Toggle({ checked, onChange }: ToggleProps) {
   return (
     <Switch
       checked={checked}

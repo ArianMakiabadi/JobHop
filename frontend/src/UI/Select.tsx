@@ -1,4 +1,14 @@
-function Select({ value, onChange, options, placeholder }) {
+import type { ChangeEventHandler } from "react";
+import type { SelectOption } from "../types";
+
+interface SelectProps {
+  value: string;
+  onChange: ChangeEventHandler<HTMLSelectElement>;
+  options: SelectOption[];
+  placeholder?: string;
+}
+
+function Select({ value, onChange, options, placeholder }: SelectProps) {
   return (
     <select
       value={value}
