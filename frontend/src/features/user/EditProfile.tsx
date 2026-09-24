@@ -2,7 +2,11 @@ import { useForm } from "react-hook-form";
 import TextField from "../../UI/TextField";
 import useUser from "../authentication/useUser";
 import useEditProfile from "./useEditProfile";
-import Loading from "../../UI/Loading";
+
+interface EditProfileFormValues {
+  name: string;
+  email: string;
+}
 
 function EditProfile() {
   const { user } = useUser();
@@ -11,14 +15,14 @@ function EditProfile() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<EditProfileFormValues>({
     defaultValues: {
-      name: user.name,
-      email: user.email,
+      name: user?.name,
+      email: user?.email,
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: EditProfileFormValues) => {
     editUserInfo(data);
     console.log("submit", data);
   };

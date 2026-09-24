@@ -7,6 +7,8 @@ import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import useUser from "./useUser";
 import { useNavigate } from "react-router-dom";
+import getErrorMessage from "../../utils/getErrorMessage";
+import type { GetOtpPayload } from "../../types";
 
 function AuthContainer() {
   const [step, setStep] = useState(1);
@@ -34,7 +36,7 @@ function AuthContainer() {
     }
   }, [user, navigate]);
 
-  const sendOtpHandler = async (data) => {
+  const sendOtpHandler = async (data: GetOtpPayload) => {
     const phoneNumber = String(data.phoneNumber || "").trim();
     // If the PhoneInput only provides a country code (e.g. "+49") it shouldn't be sent.
     // Reject if the value is just +<1-3 digits> (typical country calling codes),
@@ -54,17 +56,11 @@ function AuthContainer() {
       toast.success(message);
       setStep(2);
     } catch (error) {
-      toast.error(error?.response?.data?.message);
+      toast.error(getErrorMessage(error));
     }
   };
 
-  const {
-    handleSubmit,
-    register,
-    control,
-    getValues,
-    formState: { errors },
-  } = useForm();
+  const { handleSubmit, control, getValues } = useForm<GetOtpPayload>();
   const renderStep = () => {
     switch (step) {
       case 1:
@@ -73,9 +69,6 @@ function AuthContainer() {
             control={control}
             isSendingOtp={isSendingOtp}
             onSubmit={handleSubmit(sendOtpHandler)}
-            setStep={setStep}
-            register={register}
-            errors={errors}
             validationSchema={{
               required: "Please enter your phone number.",
               pattern: {
@@ -88,7 +81,9 @@ function AuthContainer() {
       case 2:
         return (
           <CheckOTPForm
-            onResendOtp={sendOtpHandler}
+            onResendOtp={() =>
+              sendOtpHandler({ phoneNumber: getValues("phoneNumber") })
+            }
             phoneNumber={getValues("phoneNumber")}
             onBack={() => setStep(1)}
           />

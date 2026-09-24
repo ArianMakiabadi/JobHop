@@ -8,7 +8,7 @@ function UsersTable() {
   const { isLoading, users } = useUsers();
 
   if (isLoading) return <Loading />;
-  if (!users.length) return <Empty resourceName="users" />;
+  if (!users?.length) return <Empty resourceName="users" />;
   return (
     <Table>
       <Table.Header>

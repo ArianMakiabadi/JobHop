@@ -6,6 +6,8 @@ import toast from "react-hot-toast";
 import Loading from "../../UI/Loading";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import getErrorMessage from "../../utils/getErrorMessage";
+import type { CompleteProfilePayload } from "../../types";
 
 function CompleteProfileForm() {
   const navigate = useNavigate();
@@ -13,13 +15,13 @@ function CompleteProfileForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<CompleteProfilePayload>();
 
   const { isPending, mutateAsync } = useMutation({
     mutationFn: completeProfile,
   });
 
-  const formSubmit = async (data) => {
+  const formSubmit = async (data: CompleteProfilePayload) => {
     try {
       const { user } = await mutateAsync(data);
       if (user.status !== 2) {
@@ -30,7 +32,7 @@ function CompleteProfileForm() {
       if (user.role === "EMPLOYER") return navigate("/employer");
       if (user.role === "FREELANCER") return navigate("/freelancer");
     } catch (error) {
-      toast.error(error?.response?.data?.message);
+      toast.error(getErrorMessage(error));
     }
   };
 

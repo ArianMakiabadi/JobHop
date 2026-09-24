@@ -5,6 +5,8 @@ import { demoLogin } from "../../services/authService";
 import { useForm } from "react-hook-form";
 import Loading from "../../UI/Loading";
 import toast from "react-hot-toast";
+import getErrorMessage from "../../utils/getErrorMessage";
+import type { LoginPayload, UserRole } from "../../types";
 
 function DemoLogin() {
   const navigate = useNavigate();
@@ -12,14 +14,14 @@ function DemoLogin() {
     mutationFn: demoLogin,
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: LoginPayload) => {
     const { email, password } = data;
 
     try {
       const { user, message } = await mutateAsync({ email, password });
       toast.success(message);
 
-      const roleRoutes = {
+      const roleRoutes: Partial<Record<UserRole, string>> = {
         EMPLOYER: "/employer",
         FREELANCER: "/freelancer",
         ADMIN: "/admin",
@@ -27,7 +29,7 @@ function DemoLogin() {
       const route = roleRoutes[user.role];
       if (route) navigate(route);
     } catch (error) {
-      toast.error(error?.response?.data?.message);
+      toast.error(getErrorMessage(error));
     }
   };
 
@@ -35,7 +37,7 @@ function DemoLogin() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<LoginPayload>();
 
   return (
     <div className="container xl:max-w-screen-xl">

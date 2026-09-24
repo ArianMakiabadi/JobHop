@@ -4,8 +4,14 @@ import RHFSelect from "../../../UI/RHFSelect";
 import Loading from "../../../UI/Loading";
 import useChangeUserStatus from "./useChangeUserStatus";
 import toast from "react-hot-toast";
+import type {
+  ChangeUserStatusPayload,
+  SelectOption,
+  UserRole,
+  UserStatus,
+} from "../../../types";
 
-const options = [
+const options: SelectOption<UserStatus>[] = [
   {
     label: "rejected",
     value: 0,
@@ -20,15 +26,33 @@ const options = [
   },
 ];
 
-function ChangeUserStatus({ status, userId, onClose, role }) {
+interface ChangeUserStatusFormValues {
+  status: ChangeUserStatusPayload["status"];
+}
+
+interface ChangeUserStatusProps {
+  status: UserStatus;
+  userId: string;
+  onClose: () => void;
+  role: UserRole;
+}
+
+function ChangeUserStatus({
+  status,
+  userId,
+  onClose,
+  role,
+}: ChangeUserStatusProps) {
   const { isUpdating, changeUserStatus } = useChangeUserStatus();
-  const { register, handleSubmit, watch } = useForm({
-    defaultValues: {
-      status: status,
-    },
-  });
+  const { register, handleSubmit, watch } = useForm<ChangeUserStatusFormValues>(
+    {
+      defaultValues: {
+        status: status,
+      },
+    }
+  );
   const queryClient = useQueryClient();
-  const onSubmit = (data) => {
+  const onSubmit = (data: ChangeUserStatusFormValues) => {
     if (data.status === status) {
       onClose();
       return;

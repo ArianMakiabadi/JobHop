@@ -3,16 +3,30 @@ import TextField from "../../UI/TextField";
 import Loading from "../../UI/Loading";
 import useCreateCategory from "./useCreateCategory";
 import useEditCategory from "./useEditCategory";
+import type { Category, CategoryPayload } from "../../types";
 
-const CreateCategoryForm = ({ onClose, categoryToEdit = {} }) => {
+interface CategoryFormValues {
+  title: string;
+  description: string;
+}
+
+interface CreateCategoryFormProps {
+  onClose: () => void;
+  categoryToEdit?: Category;
+}
+
+const CreateCategoryForm = ({
+  onClose,
+  categoryToEdit,
+}: CreateCategoryFormProps) => {
   const { isCreating, createCategory } = useCreateCategory();
   const { isEditing, editCategory } = useEditCategory();
-  const { _id: categoryToEditId } = categoryToEdit;
+  const categoryToEditId = categoryToEdit?._id;
   const isEditMode = Boolean(categoryToEditId);
-  const { title, description } = categoryToEdit;
 
-  let oldValues = {};
-  if (isEditMode) {
+  let oldValues: Partial<CategoryFormValues> = {};
+  if (categoryToEdit && isEditMode) {
+    const { title, description } = categoryToEdit;
     oldValues = {
       title,
       description,
@@ -24,19 +38,19 @@ const CreateCategoryForm = ({ onClose, categoryToEdit = {} }) => {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm({
+  } = useForm<CategoryFormValues>({
     defaultValues: oldValues,
   });
 
-  const onSubmit = (data) => {
-    const newCategory = {
+  const onSubmit = (data: CategoryFormValues) => {
+    const newCategory: CategoryPayload = {
       ...data,
       englishTitle: data.title, // the same value for englishTitle
       type: "project",
     };
     console.log(newCategory);
 
-    if (isEditMode) {
+    if (categoryToEditId) {
       editCategory(
         { id: categoryToEditId, data: newCategory },
         {

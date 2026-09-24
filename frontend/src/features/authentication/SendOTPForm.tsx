@@ -1,10 +1,28 @@
 import Loading from "../../UI/Loading";
-import { Controller } from "react-hook-form";
+import type { FormEventHandler } from "react";
+import {
+  Controller,
+  type Control,
+  type ControllerProps,
+} from "react-hook-form";
 import { PhoneInput } from "react-international-phone";
 import { useNavigate } from "react-router-dom";
 import "react-international-phone/style.css";
+import type { GetOtpPayload } from "../../types";
 
-function SendOTPForm({ isSendingOtp, onSubmit, control, validationSchema }) {
+interface SendOTPFormProps {
+  isSendingOtp: boolean;
+  onSubmit: FormEventHandler<HTMLFormElement>;
+  control: Control<GetOtpPayload>;
+  validationSchema?: ControllerProps<GetOtpPayload, "phoneNumber">["rules"];
+}
+
+function SendOTPForm({
+  isSendingOtp,
+  onSubmit,
+  control,
+  validationSchema,
+}: SendOTPFormProps) {
   const navigate = useNavigate();
   return (
     <div className="border shadow-md px-10 pb-8 pt-10 mx-auto rounded-3xl">
@@ -32,7 +50,6 @@ function SendOTPForm({ isSendingOtp, onSubmit, control, validationSchema }) {
                 <PhoneInput
                   value={field.value}
                   onChange={(value) => field.onChange(value)}
-                  country="de"
                   defaultCountry="de"
                   inputStyle={{ width: "100%" }}
                   inputProps={{ name: "phoneNumber", required: true }}

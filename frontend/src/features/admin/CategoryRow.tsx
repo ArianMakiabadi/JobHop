@@ -7,8 +7,14 @@ import useRemoveCategory from "./useRemoveCategory";
 import { useQueryClient } from "@tanstack/react-query";
 import { HiOutlineTrash } from "react-icons/hi";
 import { TbPencilMinus } from "react-icons/tb";
+import type { Category } from "../../types";
 
-const CategoryRow = ({ category, index }) => {
+interface CategoryRowProps {
+  category: Category;
+  index: number;
+}
+
+const CategoryRow = ({ category, index }: CategoryRowProps) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDelete, setIsDeleteOpen] = useState(false);
   const { removeCategory } = useRemoveCategory();
