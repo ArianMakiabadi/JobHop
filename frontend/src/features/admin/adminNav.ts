@@ -6,8 +6,9 @@ import {
   FiUsers,
 } from "react-icons/fi";
 import { BiCategory } from "react-icons/bi";
+import type { NavItem } from "../../types";
 
-export const adminNav = [
+export const adminNav: NavItem[] = [
   { to: "dashboard", icon: FiHome, label: "Home" },
   { to: "users", icon: FiUsers, label: "Users" },
   { to: "projects", icon: FiFolder, label: "Projects" },

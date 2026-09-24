@@ -3,8 +3,14 @@ import Modal from "../../../UI/Modal";
 import Table from "../../../UI/Table";
 import truncateText from "../../../utils/truncateText";
 import ChangeUserStatus from "./ChangeUserStatus";
+import type { User } from "../../../types";
 
-function UserTableRow({ index, user }) {
+interface UserTableRowProps {
+  index: number;
+  user: User;
+}
+
+function UserTableRow({ index, user }: UserTableRowProps) {
   const { name = "-", email = "-", phoneNumber, role, status } = user;
   const [isOpen, setIsOpen] = useState(false);
 

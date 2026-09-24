@@ -1,7 +1,19 @@
 import { FiFileText, FiFolder, FiTag, FiUsers } from "react-icons/fi";
 import Stat from "../../UI/Stat";
 
-function AdminStats({ users, proposals, projects, categories }) {
+interface AdminStatsProps {
+  users: number;
+  proposals: number;
+  projects: number;
+  categories: number;
+}
+
+function AdminStats({
+  users,
+  proposals,
+  projects,
+  categories,
+}: AdminStatsProps) {
   return (
     <div
       className="

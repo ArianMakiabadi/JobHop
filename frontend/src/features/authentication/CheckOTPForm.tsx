@@ -1,14 +1,22 @@
 import { useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import OTPInput from "react-otp-input";
 import { checkOtp } from "../../services/authService";
 import toast from "react-hot-toast";
 import { HiArrowNarrowLeft } from "react-icons/hi";
 import Loading from "../../UI/Loading";
 import { useNavigate } from "react-router-dom";
+import getErrorMessage from "../../utils/getErrorMessage";
+import type { UserRole } from "../../types";
 const OTP_RESEND_DELAY = 90;
 
-function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
+interface CheckOTPFormProps {
+  phoneNumber: string;
+  onBack: () => void;
+  onResendOtp: () => void;
+}
+
+function CheckOTPForm({ phoneNumber, onBack, onResendOtp }: CheckOTPFormProps) {
   const navigate = useNavigate();
   const [otp, setOtp] = useState("");
   const [time, setTime] = useState(OTP_RESEND_DELAY);
@@ -17,7 +25,7 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
     mutationFn: checkOtp,
   });
 
-  const checkOtpHandler = async (e) => {
+  const checkOtpHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const { user, message } = await mutateAsync({ phoneNumber, otp });
@@ -30,7 +38,7 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
         return;
       }
 
-      const roleRoutes = {
+      const roleRoutes: Partial<Record<UserRole, string>> = {
         EMPLOYER: "/employer",
         FREELANCER: "/freelancer",
         ADMIN: "/admin",
@@ -38,7 +46,7 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
       const route = roleRoutes[user.role];
       if (route) navigate(route);
     } catch (error) {
-      toast.error(error?.response?.data?.message);
+      toast.error(getErrorMessage(error));
     }
   };
 
@@ -72,7 +80,7 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
           numInputs={6}
           inputType="number"
           renderSeparator={<span>-</span>}
-          renderInput={(props) => <input type="text" {...props} />}
+          renderInput={(props) => <input {...props} />}
           containerStyle="flex gap-x-1 md:gap-x-2 justify-center"
           inputStyle={{
             width: "2.3rem",
@@ -95,9 +103,10 @@ function CheckOTPForm({ phoneNumber, onBack, onResendOtp }) {
             <p>Request a new code in {time} seconds</p>
           ) : (
             <button
+              type="button"
               className="underline"
-              onClick={(e) => {
-                onResendOtp(e); // calls sendOtpHandler()
+              onClick={() => {
+                onResendOtp(); // calls sendOtpHandler()
                 setTime(OTP_RESEND_DELAY); // resets countdown
               }}
             >

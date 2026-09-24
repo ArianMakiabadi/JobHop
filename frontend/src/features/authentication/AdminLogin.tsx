@@ -5,6 +5,8 @@ import { adminLogin } from "../../services/authService";
 import { useForm } from "react-hook-form";
 import Loading from "../../UI/Loading";
 import toast from "react-hot-toast";
+import getErrorMessage from "../../utils/getErrorMessage";
+import type { LoginPayload } from "../../types";
 
 function AdminLogin() {
   const navigate = useNavigate();
@@ -12,7 +14,7 @@ function AdminLogin() {
     mutationFn: adminLogin,
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: LoginPayload) => {
     const { email, password } = data;
 
     try {
@@ -20,7 +22,7 @@ function AdminLogin() {
       toast.success(message);
       navigate("/admin");
     } catch (error) {
-      toast.error(error?.response?.data?.message);
+      toast.error(getErrorMessage(error));
     }
   };
 
@@ -28,7 +30,7 @@ function AdminLogin() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<LoginPayload>();
 
   return (
     <div className="container xl:max-w-screen-xl">

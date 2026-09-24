@@ -24,9 +24,9 @@ function DashboardLayout() {
     <div>
       <DashboardHeader />
       <AdminStats
-        proposals={proposals.length}
-        projects={projects.length}
-        users={users.length}
+        proposals={proposals?.length ?? 0}
+        projects={projects?.length ?? 0}
+        users={users?.length ?? 0}
         categories={categories.length}
       />
     </div>

@@ -7,7 +7,7 @@ function Logout() {
   return isPending ? (
     <Loading />
   ) : (
-    <button onClick={logout}>
+    <button onClick={() => logout()}>
       <FiLogOut className="h-5 w-5 text-secondary-500 hover:text-error" />
     </button>
   );
