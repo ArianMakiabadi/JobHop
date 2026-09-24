@@ -1,8 +1,13 @@
 import Empty from "../../UI/Empty";
 import Table from "../../UI/Table";
 import ProposalTableRow from "./ProposalTableRow";
+import type { ProposalWithUser } from "../../types";
 
-function ProposalsTable({ proposals }) {
+interface ProposalsTableProps {
+  proposals: ProposalWithUser[];
+}
+
+function ProposalsTable({ proposals }: ProposalsTableProps) {
   if (!proposals.length) return <Empty resourceName="proposals" />;
   return (
     <Table>

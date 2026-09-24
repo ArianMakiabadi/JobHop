@@ -1,7 +1,8 @@
 import { HiCollection, HiHome } from "react-icons/hi";
 import { FiFileText, FiSettings } from "react-icons/fi";
+import type { NavItem } from "../../types";
 
-export const freelancerNav = [
+export const freelancerNav: NavItem[] = [
   { to: "dashboard", icon: HiHome, label: "Home" },
   { to: "projects", icon: HiCollection, label: "Projects" },
   { to: "proposals", icon: FiFileText, label: "Proposals" },

@@ -1,8 +1,13 @@
 import { FiTrendingUp, FiUser } from "react-icons/fi";
 import Stat from "../../UI/Stat";
 import { FcAcceptDatabase } from "react-icons/fc";
+import type { Project } from "../../types";
 
-function EmployerStats({ projects }) {
+interface EmployerStatsProps {
+  projects: Project[];
+}
+
+function EmployerStats({ projects }: EmployerStatsProps) {
   const countOfProjects = projects.length;
   const hiredProjectsCount = projects.filter(
     (p) => p.freelancer !== null

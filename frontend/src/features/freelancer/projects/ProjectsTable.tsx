@@ -7,7 +7,7 @@ import ProjectTableRow from "./ProjectTableRow";
 function ProjectsTable() {
   const { isLoading, projects } = useProjects();
   if (isLoading) return <Loading />;
-  if (!projects.length) return <Empty resourceName="projects" />;
+  if (!projects?.length) return <Empty resourceName="projects" />;
 
   return (
     <Table>

@@ -2,18 +2,26 @@ import { useForm } from "react-hook-form";
 import TextField from "../../UI/TextField";
 import Loading from "../../UI/Loading";
 import useCreateProposal from "./useCreateProposal";
+import type { CreateProposalPayload } from "../../types";
 
-function CreateProposals({ onClose, projectId }) {
+type ProposalFormValues = Omit<CreateProposalPayload, "projectId">;
+
+interface CreateProposalsProps {
+  onClose: () => void;
+  projectId: string;
+}
+
+function CreateProposals({ onClose, projectId }: CreateProposalsProps) {
   const { isCreating, createProposal } = useCreateProposal();
   const {
     handleSubmit,
     reset,
     register,
     formState: { errors },
-  } = useForm();
+  } = useForm<ProposalFormValues>();
 
-  const onSubmit = (data) => {
-    const newProposal = {
+  const onSubmit = (data: ProposalFormValues) => {
+    const newProposal: CreateProposalPayload = {
       ...data,
       projectId,
     };

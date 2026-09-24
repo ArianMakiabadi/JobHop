@@ -3,13 +3,18 @@ import Modal from "../../UI/Modal";
 import Table from "../../UI/Table";
 import ChangeProposalStatus from "./ChangeProposalStatus";
 import truncateText from "../../utils/truncateText";
+import type {
+  ProposalStatus,
+  ProposalWithUser,
+  StatusBadge,
+} from "../../types";
 
 //propsal.status:
 // 0 => rejected
 // 1 => pending
 // 2 => approved
 
-const statusStyle = [
+const statusStyle: Record<ProposalStatus, StatusBadge> = [
   {
     label: "rejected",
     className: "badge--danger",
@@ -24,7 +29,12 @@ const statusStyle = [
   },
 ];
 
-function ProposalTableRow({ proposal, index }) {
+interface ProposalTableRowProps {
+  proposal: ProposalWithUser;
+  index: number;
+}
+
+function ProposalTableRow({ proposal, index }: ProposalTableRowProps) {
   const { user, status } = proposal;
   const [isOpen, setIsOpen] = useState(false);
   return (

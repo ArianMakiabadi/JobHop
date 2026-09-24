@@ -1,7 +1,12 @@
 import { FiAward, FiClipboard, FiDollarSign } from "react-icons/fi";
 import Stat from "../../UI/Stat";
+import type { Proposal } from "../../types";
 
-function FreelancerStats({ proposals }) {
+interface FreelancerStatsProps {
+  proposals: Proposal[];
+}
+
+function FreelancerStats({ proposals }: FreelancerStatsProps) {
   const countOfProposals = proposals.length;
   const acceptedProposals = proposals.filter((p) => p.status === 2);
   const countAcceptedProposals = acceptedProposals.length;

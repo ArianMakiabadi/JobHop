@@ -1,17 +1,17 @@
 import Loading from "../../UI/Loading";
-import useEmployerProjects from "../projects/useEmployerProjects";
+import useProposals from "../proposals/useProposals";
 import DashboardHeader from "./DashboardHeader";
-import EmployerStats from "./EmployerStats";
+import FreelancerStats from "./FreelancerStats";
 
 function DashboardLayout() {
-  const { isLoading, projects } = useEmployerProjects();
+  const { isLoading, proposals } = useProposals();
 
   if (isLoading) return <Loading />;
 
   return (
     <div>
       <DashboardHeader />
-      <EmployerStats projects={projects} />
+      <FreelancerStats proposals={proposals ?? []} />
     </div>
   );
 }

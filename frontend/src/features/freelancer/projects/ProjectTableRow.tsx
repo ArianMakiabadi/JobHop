@@ -5,11 +5,17 @@ import truncateText from "../../../utils/truncateText";
 import { useState } from "react";
 import Modal from "../../../UI/Modal";
 import CreateProposals from "../../proposals/CreateProposals";
+import type { Project, ProjectStatus, StatusBadge } from "../../../types";
 
-function ProjectTableRow({ project, index }) {
+interface ProjectTableRowProps {
+  project: Project;
+  index: number;
+}
+
+function ProjectTableRow({ project, index }: ProjectTableRowProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { status, category, title, budget, deadline } = project;
-  const projectStatus = {
+  const projectStatus: Record<ProjectStatus, StatusBadge> = {
     OPEN: {
       label: "open",
       className: "badge--success",

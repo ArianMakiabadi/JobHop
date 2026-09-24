@@ -70,12 +70,7 @@ function ProjectsHeader() {
       </div>
 
       {/* Mobile modal drawer */}
-      <Modal
-        id="mobile-filters"
-        title="Filters"
-        open={open}
-        onClose={() => setOpen(false)}
-      >
+      <Modal title="Filters" open={open} onClose={() => setOpen(false)}>
         <div className="flex flex-col gap-3">
           <Filter paramKey="status" options={statusOptions} />
           <FilterDropDown

@@ -8,7 +8,7 @@ function ProposalsTable() {
   const { isLoading, proposals } = useProposals();
 
   if (isLoading) return <Loading />;
-  if (!proposals.length) return <Empty resourceName="proposals" />;
+  if (!proposals?.length) return <Empty resourceName="proposals" />;
   return (
     <Table>
       <Table.Header>
