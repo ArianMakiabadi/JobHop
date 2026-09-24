@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
+import type { Project } from "../../types";
 
-function ProjectAssignee({ project }) {
+interface ProjectAssigneeProps {
+  project: Project;
+}
+
+function ProjectAssignee({ project }: ProjectAssigneeProps) {
   const proposalsCount = project.proposals?.length || 0;
 
   return (

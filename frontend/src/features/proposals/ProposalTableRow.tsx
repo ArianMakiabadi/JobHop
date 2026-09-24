@@ -1,9 +1,15 @@
 import Table from "../../UI/Table";
 import truncateText from "../../utils/truncateText";
+import type { Proposal, ProposalStatus, StatusBadge } from "../../types";
 
-function ProposalTableRow({ proposal, index }) {
+interface ProposalTableRowProps {
+  proposal: Proposal;
+  index: number;
+}
+
+function ProposalTableRow({ proposal, index }: ProposalTableRowProps) {
   const { status, description, duration, price } = proposal;
-  const statusStyle = [
+  const statusStyle: Record<ProposalStatus, StatusBadge> = [
     {
       label: "rejected",
       className: "badge--danger",

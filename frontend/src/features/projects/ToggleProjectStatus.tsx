@@ -2,8 +2,13 @@ import useToggleProjectStatus from "./useToggleProjectStatus";
 import toast from "react-hot-toast";
 import Loading from "../../UI/Loading";
 import Toggle from "../../UI/Toggle";
+import type { Project } from "../../types";
 
-function ToggleProjectStatus({ project }) {
+interface ToggleProjectStatusProps {
+  project: Project;
+}
+
+function ToggleProjectStatus({ project }: ToggleProjectStatusProps) {
   const enabled = project.status === "OPEN" ? true : false;
 
   const { isUpdating, toggleProject } = useToggleProjectStatus();

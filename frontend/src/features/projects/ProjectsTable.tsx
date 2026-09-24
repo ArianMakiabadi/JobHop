@@ -2,10 +2,17 @@ import Loading from "../../UI/Loading";
 import Empty from "../../UI/Empty";
 import Table from "../../UI/Table";
 import ProjectTableRow from "./ProjectTableRow";
+import type { Project } from "../../types";
 
-function ProjectsTable({ isLoading, projects }) {
+interface ProjectsTableProps {
+  isLoading: boolean;
+  // undefined while the query is disabled or failed
+  projects: Project[] | undefined;
+}
+
+function ProjectsTable({ isLoading, projects }: ProjectsTableProps) {
   if (isLoading) return <Loading />;
-  if (!projects.length) return <Empty resourceName="projects" />;
+  if (!projects?.length) return <Empty resourceName="projects" />;
   return (
     <Table>
       <Table.Header>

@@ -10,8 +10,14 @@ import useRemoveProject from "./useRemoveProject";
 import CreateProjectForm from "./CreateProjectForm";
 import ToggleProjectStatus from "./ToggleProjectStatus";
 import ProjectAssignee from "./ProjectAssignee";
+import type { Project } from "../../types";
 
-function ProjectTableRow({ project, index }) {
+interface ProjectTableRowProps {
+  project: Project;
+  index: number;
+}
+
+function ProjectTableRow({ project, index }: ProjectTableRowProps) {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const { removeProject } = useRemoveProject();
@@ -66,7 +72,7 @@ function ProjectTableRow({ project, index }) {
               onClose={() => setIsDeleteOpen(false)}
               onConfirm={() =>
                 removeProject(project._id, {
-                  onSuccess: setIsDeleteOpen(false),
+                  onSuccess: () => setIsDeleteOpen(false),
                 })
               }
               disabled={false}

@@ -4,41 +4,60 @@ import RHFSelect from "../../UI/RHFSelect";
 import { TagsInput } from "react-tag-input-component";
 import { useState } from "react";
 import DatePickerField from "../../UI/DatePickerField";
+import type { Value } from "react-multi-date-picker";
 import useCategories from "../../hooks/useCategories";
 import useCreateProject from "./useCreateProject";
 import Loading from "../../UI/Loading";
 import useEditProject from "./useEditProject";
+import type { CreateProjectPayload, Project } from "../../types";
 
-function CreateProjectForm({ onClose, projectToEdit = {} }) {
-  const isEditMode = !!projectToEdit._id;
+type ProjectFormValues = Omit<CreateProjectPayload, "tags" | "deadline">;
+
+interface CreateProjectFormProps {
+  onClose: () => void;
+  projectToEdit?: Project;
+}
+
+// Same result as the old `new Date(date)`: a picked date is a DateObject, null gave the epoch
+function toDate(value: Value): Date {
+  if (value === null) return new Date(0);
+  if (typeof value === "object" && !(value instanceof Date))
+    return value.toDate();
+  return new Date(value);
+}
+
+function CreateProjectForm({ onClose, projectToEdit }: CreateProjectFormProps) {
+  const isEditMode = !!projectToEdit?._id;
   const {
     register,
     formState: { errors },
     handleSubmit,
     reset,
     watch,
-  } = useForm({
+  } = useForm<ProjectFormValues>({
     defaultValues: {
-      title: projectToEdit.title ?? "",
-      description: projectToEdit.description ?? "",
-      budget: projectToEdit.budget ?? "",
-      category: projectToEdit.category?._id ?? "",
+      title: projectToEdit?.title ?? "",
+      description: projectToEdit?.description ?? "",
+      budget: projectToEdit?.budget ?? "",
+      category: projectToEdit?.category?._id ?? "",
     },
   });
 
-  const [tags, setTags] = useState(projectToEdit.tags ?? []);
-  const [date, setDate] = useState(new Date(projectToEdit.deadline ?? ""));
+  const [tags, setTags] = useState<string[]>(projectToEdit?.tags ?? []);
+  const [date, setDate] = useState<Value>(
+    new Date(projectToEdit?.deadline ?? "")
+  );
   const { categories } = useCategories();
   const { createProject, isCreating } = useCreateProject();
   const { editProject } = useEditProject();
 
-  const onSubmit = (data) => {
-    const newProject = {
+  const onSubmit = (data: ProjectFormValues) => {
+    const newProject: CreateProjectPayload = {
       ...data,
       tags,
-      deadline: new Date(date).toISOString(),
+      deadline: toDate(date).toISOString(),
     };
-    if (isEditMode) {
+    if (projectToEdit && isEditMode) {
       editProject(
         { id: projectToEdit._id, newProject },
         {
@@ -64,7 +83,6 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
         register={register}
         name="title"
         label="Title"
-        placeholder="Title of the Project"
         errors={errors}
         required
         validationSchema={{
@@ -83,7 +101,6 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
         register={register}
         name="description"
         label="Description"
-        placeholder="Description of the Project"
         errors={errors}
         required
         validationSchema={{
@@ -98,7 +115,6 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
         register={register}
         name="budget"
         label="Budget (Euros)"
-        placeholder="Budget of the Project"
         errors={errors}
         required
         validationSchema={{
@@ -127,7 +143,6 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
           tags
         </label>
         <TagsInput
-          id="tags"
           value={tags}
           onChange={setTags}
           name="tags"

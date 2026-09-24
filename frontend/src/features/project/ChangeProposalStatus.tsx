@@ -4,8 +4,13 @@ import useChangeProposalStatus from "./useChangeProposalStatus";
 import { useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import Loading from "../../UI/Loading";
+import type {
+  ChangeProposalStatusPayload,
+  ProposalStatus,
+  SelectOption,
+} from "../../types";
 
-const options = [
+const options: SelectOption<ProposalStatus>[] = [
   {
     label: "rejected",
     value: 0,
@@ -20,16 +25,33 @@ const options = [
   },
 ];
 
-function ChangeProposalStatus({ proposalId, onClose, status }) {
-  const { register, handleSubmit, watch } = useForm({
-    defaultValues: {
-      status: status,
-    },
-  });
+interface ChangeProposalStatusFormValues {
+  status: ChangeProposalStatusPayload["status"];
+}
+
+interface ChangeProposalStatusProps {
+  proposalId: string;
+  onClose: () => void;
+  status: ProposalStatus;
+}
+
+function ChangeProposalStatus({
+  proposalId,
+  onClose,
+  status,
+}: ChangeProposalStatusProps) {
+  const { register, handleSubmit, watch } =
+    useForm<ChangeProposalStatusFormValues>({
+      defaultValues: {
+        status: status,
+      },
+    });
   const { id: projectId } = useParams();
   const { isUpdating, changeProposalStatus } = useChangeProposalStatus();
   const queryClient = useQueryClient();
-  const onSubmit = (data) => {
+  const onSubmit = (data: ChangeProposalStatusFormValues) => {
+    // the route always has `:id`; this only narrows the type
+    if (!projectId) return;
     changeProposalStatus(
       { proposalId, projectId, ...data },
       {
