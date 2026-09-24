@@ -1,4 +1,21 @@
-export default function RadioButton({
+import type {
+  FieldValues,
+  Path,
+  RegisterOptions,
+  UseFormRegister,
+} from "react-hook-form";
+
+interface RadioButtonProps<T extends FieldValues> {
+  name: Path<T>;
+  value: string | number;
+  register: UseFormRegister<T>;
+  id: string;
+  label: string;
+  validationSchema?: RegisterOptions<T, Path<T>>;
+  stretch?: boolean;
+}
+
+export default function RadioButton<T extends FieldValues>({
   name, // input name="role"
   value, // currently selected value
   register,
@@ -6,13 +23,12 @@ export default function RadioButton({
   label,
   validationSchema,
   stretch = false, // if true => buttons stretch evenly
-}) {
+}: RadioButtonProps<T>) {
   return (
     <div className={`flex gap-4 items-center ${stretch ? "flex-1" : ""}`}>
       <div className={`${stretch ? "flex-1" : ""}`}>
         <input
           type="radio"
-          name={name}
           id={id}
           value={value}
           className="peer hidden"

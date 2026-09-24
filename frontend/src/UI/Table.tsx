@@ -1,4 +1,10 @@
-function Table({ children }) {
+import type { ReactNode } from "react";
+
+interface TableProps {
+  children: ReactNode;
+}
+
+function Table({ children }: TableProps) {
   return (
     <div className=" overflow-x-auto">
       <table>{children}</table>
@@ -8,7 +14,7 @@ function Table({ children }) {
 
 export default Table;
 
-function TableHeader({ children }) {
+function TableHeader({ children }: TableProps) {
   return (
     <thead>
       <tr className="title-row">{children}</tr>
@@ -16,11 +22,11 @@ function TableHeader({ children }) {
   );
 }
 
-function TableBody({ children }) {
+function TableBody({ children }: TableProps) {
   return <tbody>{children}</tbody>;
 }
 
-function TableRow({ children }) {
+function TableRow({ children }: TableProps) {
   return <tr>{children}</tr>;
 }
 

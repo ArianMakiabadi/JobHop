@@ -1,6 +1,12 @@
-import DatePicker from "react-multi-date-picker";
+import DatePicker, { type DateObject, type Value } from "react-multi-date-picker";
 
-function DatePickerField({ label, date, setDate }) {
+interface DatePickerFieldProps {
+  label: string;
+  date: Value;
+  setDate: (date: DateObject | null) => void;
+}
+
+function DatePickerField({ label, date, setDate }: DatePickerFieldProps) {
   return (
     <div>
       <label className="mb-2  block text-secondary-700">{label}</label>

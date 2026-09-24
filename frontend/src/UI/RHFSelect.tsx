@@ -1,14 +1,38 @@
-function RHFSelect({
+import {
+  get,
+  type FieldError,
+  type FieldErrors,
+  type FieldValues,
+  type Path,
+  type RegisterOptions,
+  type UseFormRegister,
+  type UseFormWatch,
+} from "react-hook-form";
+import type { SelectOption } from "../types";
+
+interface RHFSelectProps<T extends FieldValues> {
+  label: string;
+  name: Path<T>;
+  register: UseFormRegister<T>;
+  options: SelectOption<string | number>[];
+  errors?: FieldErrors<T>;
+  required?: boolean;
+  validationSchema?: RegisterOptions<T, Path<T>>;
+  watch: UseFormWatch<T>;
+}
+
+function RHFSelect<T extends FieldValues>({
   label,
   name,
   register,
   options,
   errors,
-  requierd,
+  required,
   validationSchema,
   watch,
-}) {
+}: RHFSelectProps<T>) {
   const value = watch(name);
+  const error: FieldError | undefined = get(errors, name);
   const hasValue = value !== undefined && value !== null && value !== "";
 
   return (
@@ -39,12 +63,12 @@ function RHFSelect({
           }
           peer-focus:-top-2.5 peer-focus:text-sm peer-focus:text-primary-500 peer-focus:bg-secondary-0 peer-focus:px-1`}
       >
-        {label} {requierd && <span className="text-error">*</span>}
+        {label} {required && <span className="text-error">*</span>}
       </label>
 
-      {errors && errors[name] && (
+      {error && (
         <span className="text-error block text-sm mt-1">
-          {errors[name]?.message}
+          {error.message}
         </span>
       )}
     </div>

@@ -115,7 +115,7 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
         register={register}
         options={categories}
         errors={errors}
-        requierd
+        required
         watch={watch}
         validationSchema={{
           required: "Please select an option.",

@@ -1,6 +1,11 @@
+import type { ReactNode } from "react";
 import useUser from "../features/authentication/useUser";
 
-function SideBar({ children }) {
+interface SideBarProps {
+  children: ReactNode;
+}
+
+function SideBar({ children }: SideBarProps) {
   const { user } = useUser();
   const firstLetter = user?.name?.[0]?.toUpperCase() || "?";
 

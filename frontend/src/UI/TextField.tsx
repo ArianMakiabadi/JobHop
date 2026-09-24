@@ -1,4 +1,25 @@
-function TextField({
+import type { HTMLInputTypeAttribute } from "react";
+import {
+  get,
+  type FieldError,
+  type FieldErrors,
+  type FieldValues,
+  type Path,
+  type RegisterOptions,
+  type UseFormRegister,
+} from "react-hook-form";
+
+interface TextFieldProps<T extends FieldValues> {
+  label?: string;
+  name: Path<T>;
+  register: UseFormRegister<T>;
+  validationSchema?: RegisterOptions<T, Path<T>>;
+  errors?: FieldErrors<T>;
+  type?: HTMLInputTypeAttribute;
+  required?: boolean;
+}
+
+function TextField<T extends FieldValues>({
   label,
   name,
   register,
@@ -6,7 +27,9 @@ function TextField({
   errors,
   type = "text",
   required,
-}) {
+}: TextFieldProps<T>) {
+  const error: FieldError | undefined = get(errors, name);
+
   return (
     <div className={`relative ${label ? "mt-6" : ""}`}>
       <input
@@ -30,9 +53,9 @@ function TextField({
         {label} {required && <span className="text-error">*</span>}
       </label>
 
-      {errors && errors[name] && (
+      {error && (
         <span className="text-error block text-sm mt-1">
-          {errors[name]?.message}
+          {error.message}
         </span>
       )}
     </div>

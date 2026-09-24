@@ -1,9 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import useAuthorize from "../features/authentication/useAuthorize";
-import { useEffect } from "react";
+import { useEffect, type ReactNode } from "react";
 import Loading from "./Loading";
 
-function ProtectedRoute({ children }) {
+interface ProtectedRouteProps {
+  children: ReactNode;
+}
+
+function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { isLoading, isAuthenticated, isAuthorized, isVerified } =
     useAuthorize();
   const navigate = useNavigate();
@@ -22,6 +26,7 @@ function ProtectedRoute({ children }) {
     );
 
   if (isAuthenticated && isAuthorized) return children;
+  return null;
 }
 
 export default ProtectedRoute;
