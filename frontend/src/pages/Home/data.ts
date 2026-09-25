@@ -10,16 +10,46 @@ import {
   FiClock,
   FiAward,
   FiZap,
-  FiChevronDown,
-  FiArrowRight,
 } from "react-icons/fi";
 import { FaWandMagicSparkles } from "react-icons/fa6";
 import { RiHandHeartLine } from "react-icons/ri";
 import { AiFillWallet } from "react-icons/ai";
-import { BsFillWalletFill } from "react-icons/bs";
 import { RiRocketLine } from "react-icons/ri";
+import type { IconType } from "react-icons";
 
-export const features = [
+export interface HomeFeature {
+  icon: IconType;
+  title: string;
+  desc: string;
+}
+
+export interface HighlightPill {
+  icon: IconType;
+  label: string;
+}
+
+export interface HomeStat {
+  value: string;
+  label: string;
+}
+
+export interface Testimonial {
+  quote: string;
+  name: string;
+  role: string;
+}
+
+export interface FaqItem {
+  q: string;
+  a: string;
+}
+
+export interface TabItem {
+  icon: IconType;
+  text: string;
+}
+
+export const features: HomeFeature[] = [
   {
     icon: FiUsers,
     title: "Connect",
@@ -52,7 +82,7 @@ export const features = [
   },
 ];
 
-export const highlightPills = [
+export const highlightPills: HighlightPill[] = [
   { icon: FaWandMagicSparkles, label: "No placement fees" },
   { icon: RiHandHeartLine, label: "1-click contracts" },
   { icon: AiFillWallet, label: "Escrow payouts" },
@@ -61,14 +91,14 @@ export const highlightPills = [
   { icon: FiMessageSquare, label: "24/7 support" },
 ];
 
-export const stats = [
+export const stats: HomeStat[] = [
   { value: ">50k", label: "Matches" },
   { value: "24h", label: "Avg. hire time" },
   { value: "4.9/5", label: "Satisfaction" },
   { value: "$1M+", label: "Paid out" },
 ];
 
-export const testimonials = [
+export const testimonials: Testimonial[] = [
   {
     quote:
       "We cut our time-to-hire from 3 weeks to 48 hours. The shortlists are scarily accurate.",
@@ -89,7 +119,7 @@ export const testimonials = [
   },
 ];
 
-export const faq = [
+export const faq: FaqItem[] = [
   {
     q: "How are candidates vetted?",
     a: "Profiles blend portfolio evidence, verified IDs, skill checks, and reference-backed reviews.",
@@ -104,14 +134,14 @@ export const faq = [
   },
 ];
 
-export const employerTabs = [
+export const employerTabs: TabItem[] = [
   { icon: FiClock, text: "Shortlists in minutes, not weeks." },
   { icon: FiShield, text: "Reliable, compliant payments with escrow." },
   { icon: FiAward, text: "Verified skills and portfolio-backed profiles." },
   { icon: FiZap, text: "One-click NDAs and contracts." },
 ];
 
-export const freelancerTabs = [
+export const freelancerTabs: TabItem[] = [
   { icon: RiRocketLine, text: "Stand out with rich project case studies." },
   { icon: FiStar, text: "Boost ranking with outcome-based reviews." },
   { icon: AiFillWallet, text: "Milestones, fast payouts, zero surprises." },
