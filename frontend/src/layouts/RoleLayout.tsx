@@ -2,8 +2,13 @@ import { useState } from "react";
 import SideBar from "../UI/SideBar";
 import CustomNavLink from "../UI/CustomNavLink";
 import AppLayout from "./AppLayout";
+import type { NavItem } from "../types";
 
-function RoleLayout({ navItems }) {
+interface RoleLayoutProps {
+  navItems: NavItem[];
+}
+
+function RoleLayout({ navItems }: RoleLayoutProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const closeSidebar = () => setIsSidebarOpen(false);

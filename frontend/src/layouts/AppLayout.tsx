@@ -1,8 +1,15 @@
+import type { ReactNode } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "../UI/Header";
 import { FiMenu } from "react-icons/fi";
 
-function AppLayout({ children, isSidebarOpen, toggleSidebar }) {
+interface AppLayoutProps {
+  children: ReactNode;
+  isSidebarOpen: boolean;
+  toggleSidebar: () => void;
+}
+
+function AppLayout({ children, isSidebarOpen, toggleSidebar }: AppLayoutProps) {
   return (
     <div className="relative h-screen overflow-hidden">
       {/* Header */}

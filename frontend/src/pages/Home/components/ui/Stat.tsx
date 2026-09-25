@@ -1,4 +1,9 @@
-export default function Stat({ value, label }) {
+interface StatProps {
+  value: string;
+  label: string;
+}
+
+export default function Stat({ value, label }: StatProps) {
   return (
     <div className="rounded-xl border p-4 text-center bg-secondary-0/70">
       <p className="text-2xl md:text-3xl font-bold text-secondary-900">

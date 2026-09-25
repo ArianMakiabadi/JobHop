@@ -13,7 +13,7 @@ function SubmittedProjects() {
     useEmployerProjects();
 
   const renderTable = () => {
-    switch (user.role) {
+    switch (user?.role) {
       case "FREELANCER":
         return (
           <>
