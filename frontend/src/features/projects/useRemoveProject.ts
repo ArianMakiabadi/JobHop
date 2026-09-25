@@ -1,0 +1,25 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { removeProjectApi } from "../../services/projectService";
+import toast from "react-hot-toast";
+
+export default function useRemoveProject() {
+  const queryClient = useQueryClient();
+  const { mutate: removeProject, isPending: isDeleting } = useMutation({
+    mutationFn: removeProjectApi,
+    onSuccess: () => {
+      //invalidating the previous projects to update the value
+      queryClient.invalidateQueries({
+        queryKey: ["employer-projects"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["projects"],
+      });
+      toast.success("Project deleted!");
+    },
+    onError: (err) => {
+      toast.error(err.response?.data?.message ?? "Something went wrong");
+    },
+  });
+
+  return { removeProject, isDeleting };
+}
