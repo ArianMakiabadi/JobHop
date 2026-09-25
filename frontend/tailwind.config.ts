@@ -1,12 +1,15 @@
-/** @type {import('tailwindcss').Config} */
+import type { Config } from "tailwindcss";
 
-function withOpacity(variableName) {
-  return ({ opacityValue }) => {
+// Tailwind v3 still resolves color functions at runtime (it passes `opacityValue`),
+// but its `Config` types only allow string colors, hence the cast at the return.
+function withOpacity(variableName: string): string {
+  const color = ({ opacityValue }: { opacityValue?: string }) => {
     if (opacityValue !== undefined) {
       return `rgba(var(${variableName}), ${opacityValue})`;
     }
     return `rgb(var(${variableName}))`;
   };
+  return color as unknown as string;
 }
 
 export default {
@@ -64,4 +67,4 @@ export default {
     },
   },
   plugins: [],
-};
+} satisfies Config;

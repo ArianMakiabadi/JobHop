@@ -70,7 +70,7 @@ Admins have full access to manage all aspects of the platform, including:
 
 | Layer              | Technologies                         |
 | ------------------ | ------------------------------------ |
-| **Frontend**       | React, Vite, JavaScript, TailwindCSS |
+| **Frontend**       | React, Vite, TypeScript, TailwindCSS |
 | **Backend**        | Node.js, Express.js                  |
 | **Database**       | MongoDB                              |
 | **Authentication** | Twilio                               |
