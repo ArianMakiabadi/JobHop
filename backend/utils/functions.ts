@@ -139,3 +139,8 @@ export function getAuthUser(req: Request): UserDocument {
   if (!req.user) throw createError.Unauthorized("Please login to your account!");
   return req.user;
 }
+
+/** A `req.query` value as a single string. Repeated keys (`?a=1&a=2`) and nested objects give `undefined`. */
+export function getQueryString(value: unknown): string | undefined {
+  return typeof value === "string" ? value : undefined;
+}
