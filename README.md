@@ -42,8 +42,8 @@ React + Vite client  ──cookie-based API requests──>  Express API  ──
 
 | Area | Main technologies |
 | --- | --- |
-| Frontend | React 18, Vite, React Router, TanStack Query, React Hook Form, Tailwind CSS |
-| Backend | Node.js, Express, Mongoose, Joi, JSON Web Tokens |
+| Frontend | React 18, TypeScript, Vite, React Router, TanStack Query, React Hook Form, Tailwind CSS |
+| Backend | Node.js, TypeScript, Express, Mongoose, Joi, JSON Web Tokens |
 | Data | MongoDB |
 | Authentication | Twilio Verify, signed cookies, JWT access/refresh tokens |
 
@@ -51,13 +51,14 @@ React + Vite client  ──cookie-based API requests──>  Express API  ──
 
 ```text
 .
-├── frontend/                 # Vite single-page application
+├── frontend/                 # Vite + TypeScript single-page application
 │   └── src/
 │       ├── features/         # Role-specific UI and mutations
 │       ├── pages/            # Route-level screens
 │       ├── services/         # API clients
+│       ├── types/            # Shared domain and UI types
 │       └── UI/               # Shared interface components
-└── backend/                  # Express REST API
+└── backend/                  # Express REST API (TypeScript)
     └── app/
         ├── http/             # Controllers, validators, middleware
         ├── models/           # Mongoose models
@@ -101,9 +102,9 @@ The API listens on `PORT` (the example uses `5001`) and is mounted under `/api`.
 
 The frontend development server runs on `http://localhost:3000`.
 
-Before working locally, set `BASE_URL` in [`frontend/src/services/httpService.js`](frontend/src/services/httpService.js) to your local API, for example:
+Before working locally, set `BASE_URL` in [`frontend/src/services/httpService.ts`](frontend/src/services/httpService.ts) to your local API, for example:
 
-```js
+```ts
 const BASE_URL = "http://localhost:5001/api";
 ```
 
@@ -150,15 +151,18 @@ Protected API requests rely on credentialed cookies. The frontend Axios client s
 | Directory | Command | Description |
 | --- | --- | --- |
 | `frontend/` | `npm run dev` | Start the Vite development server on port 3000 |
-| `frontend/` | `npm run build` | Create a production frontend build |
+| `frontend/` | `npm run build` | Type-check, then create a production frontend build |
+| `frontend/` | `npm run typecheck` | Type-check the frontend with `tsc` (no output files) |
 | `frontend/` | `npm run lint` | Run ESLint |
 | `frontend/` | `npm run preview` | Preview the production frontend build |
-| `backend/` | `npm run dev` | Start the API with Nodemon |
-| `backend/` | `npm start` | Start the API with Node.js |
+| `backend/` | `npm run dev` | Start the API from the TypeScript sources with `tsx watch` (restarts on changes) |
+| `backend/` | `npm run build` | Compile the API to `backend/dist/` with `tsc` |
+| `backend/` | `npm run typecheck` | Type-check the backend with `tsc` (no output files) |
+| `backend/` | `npm start` | Start the compiled API (`node dist/index.js`); run `npm run build` first |
 
 ## Deployment notes
 
-Deploy the frontend as a static SPA and the backend as a Node.js service backed by MongoDB. Configure the backend production environment with the deployed frontend origin (`ALLOW_CORS_ORIGIN`), cookie domain (`DOMAIN`), MongoDB URI, token secrets, and Twilio credentials. Because authentication uses cross-origin cookies in production, the frontend origin, API origin, and cookie settings must be configured together.
+Deploy the frontend as a static SPA and the backend as a Node.js service backed by MongoDB. The backend must be built before it starts: run `npm install` (dev dependencies included, because the build needs TypeScript), then `npm run build`, then `npm start`. Configure the backend production environment with the deployed frontend origin (`ALLOW_CORS_ORIGIN`), cookie domain (`DOMAIN`), MongoDB URI, token secrets, and Twilio credentials. Because authentication uses cross-origin cookies in production, the frontend origin, API origin, and cookie settings must be configured together.
 
 The frontend includes [`frontend/public/_redirects`](frontend/public/_redirects) for SPA route handling on compatible static hosts.
 
