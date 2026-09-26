@@ -1,6 +1,6 @@
 const createHttpError = require("http-errors");
 const { UserModel } = require("../../../models/user");
-const Controller = require("../controller");
+const { Controller } = require("../controller");
 const { StatusCodes: HttpStatus } = require("http-status-codes");
 const { ProjectModel } = require("../../../models/project");
 const { ProposalModel } = require("../../../models/proposal");
