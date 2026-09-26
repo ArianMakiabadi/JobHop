@@ -1,10 +1,10 @@
-const Controller = require("./controller");
+const { Controller } = require("./controller");
 const { StatusCodes: HttpStatus } = require("http-status-codes");
 const createHttpError = require("http-errors");
 const {
   addCategorySchema,
   updateCategorySchema,
-} = require("../validators/category.shcema");
+} = require("../validators/category.schema");
 const { CategoryModel } = require("../../models/category");
 
 class CategoryController extends Controller {

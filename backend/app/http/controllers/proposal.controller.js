@@ -1,4 +1,4 @@
-const Controller = require("./controller");
+const { Controller } = require("./controller");
 const { StatusCodes: HttpStatus } = require("http-status-codes");
 const mongoose = require("mongoose");
 const createHttpError = require("http-errors");
